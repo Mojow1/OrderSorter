@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace orderSorter
 {
@@ -6,8 +7,18 @@ namespace orderSorter
     {
         static void Main(string[] args)
         {
+
+            ArrayList myVal = new ArrayList();
+            myVal.Add("hallo");
+            myVal.Add(10);
+            myVal.Add("this is a string");
+
+            foreach (var value in myVal)
+            {
+                Console.WriteLine(value);
+            }
             
-            Console.WriteLine("Hello World!");
+            
         }
 
         
