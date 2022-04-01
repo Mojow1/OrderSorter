@@ -5,4 +5,11 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MySql.Data" Version="8.0.28" />
+      <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.28" />
+      <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
+      <PackageReference Include="MySqlConnector" Version="2.1.8" />
+    </ItemGroup>
+
 </Project>
