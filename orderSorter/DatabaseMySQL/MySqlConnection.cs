@@ -9,7 +9,7 @@ namespace orderSorter.DatabaseMySQL
     public class MySqlConnection
     {
 
-        private string connString = string.Format("Server=localhost; database=; UID=root; password=Leren-2021");
+        private string connString = string.Format("Server=localhost; database=ordersorter; UID=root; password=Leren-2021");
         private MySqlConnection connection = null;
 
         public bool openConnection()
