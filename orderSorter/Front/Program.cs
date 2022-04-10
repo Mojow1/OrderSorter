@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using orderSorter.DatabaseMySQL;
 
 namespace orderSorter
 {
@@ -7,20 +11,28 @@ namespace orderSorter
     {
         static void Main(string[] args)
         {
+            List<string>[] list = new List<string>[2];
+            DBConnection db = new DBConnection();
+            db.OpenConnection();
+            list = db.Select();
 
-            ArrayList myVal = new ArrayList();
-            myVal.Add("hallo");
-            myVal.Add(10);
-            myVal.Add("this is a string");
+            Console.WriteLine();
+            Console.WriteLine("Before");
+            Console.WriteLine(list);
+            Console.WriteLine("after");
 
-            foreach (var value in myVal)
-            {
-                Console.WriteLine(value);
-            }
+          
             
+   
             
+
+
+
         }
 
         
     }
+    
+
+    
 }

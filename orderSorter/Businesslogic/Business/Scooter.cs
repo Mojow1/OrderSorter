@@ -1,6 +1,6 @@
 namespace orderSorter
 {
-    public class Scooter : Vehicle // Child class of Vehicle
+    public class Scooter // Child class of Vehicle
     {
         
     }

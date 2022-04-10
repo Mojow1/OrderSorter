@@ -1,6 +1,6 @@
 namespace orderSorter.DatabaseMySQL
 {
-    public class MySqlProductRepository : MySqlConnection
+    public class MySqlProductRepository : DBConnection
     {
         
     }
