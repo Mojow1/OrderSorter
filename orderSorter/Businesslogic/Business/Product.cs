@@ -12,5 +12,7 @@ namespace orderSorter
             this.name = name;
             this.price = price;
         }
+
+        public double Price => price;
     }
 }
