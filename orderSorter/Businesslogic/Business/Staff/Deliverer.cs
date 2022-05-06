@@ -1,6 +1,6 @@
 namespace orderSorter
 {
-    public class Deliverer
+    public class Deliverer: Employees
     {
         
     }

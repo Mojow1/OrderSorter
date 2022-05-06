@@ -1,6 +1,6 @@
 namespace orderSorter
 {
-    public interface INormalOrder
+    public interface IPreparedOrder
     {
         void Prepare();
     }

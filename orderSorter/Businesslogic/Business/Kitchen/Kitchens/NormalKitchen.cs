@@ -2,14 +2,41 @@ namespace orderSorter
 {
     public class NormalKitchen : Kitchen
     {
-        public override IPriorityOrder PrepareHighPriorityOrder()
+        private Order _order;
+        private int _normalPreparationTimeInMinutes;
+        private int _priorityTimeSavingPercentage;
+        
+        
+                
+        // Constructor Normal Kitchen High Priority
+        public NormalKitchen(Order order, int normalPreparationTimeInMinutes, int priorityTimeSavingPercentage)
         {
-            return new NormalKitchenPriorityOrder();
+            _order = order;
+            _normalPreparationTimeInMinutes = normalPreparationTimeInMinutes;
+            _priorityTimeSavingPercentage = priorityTimeSavingPercentage;
+        }
+        
+        // Constructor Normal Kitchen Normal Order
+        public NormalKitchen(Order order, int normalPreparationTimeInMinutes)
+        {
+            _order = order;
+            _normalPreparationTimeInMinutes = normalPreparationTimeInMinutes;
+        }
+        
+        public override IPreparedOrder PrepareHighPriorityOrder()
+        {
+            return new NormalKitchenPriorityOrder(_order,_normalPreparationTimeInMinutes,_priorityTimeSavingPercentage);
         }
 
-        public override INormalOrder PrepareNormalPriorityOrder()
+        public override IPreparedOrder PrepareNormalPriorityOrder()
         {
-            return new NormalKitchenNormalOrder();
+            return new NormalKitchenNormalPriority(_order, _normalPreparationTimeInMinutes);
         }
+
+        public Order Order => _order;
+
+        public int NormalPreparationTimeInMinutes => _normalPreparationTimeInMinutes;
+
+        public int PriorityTimeSavingPercentage => _priorityTimeSavingPercentage;
     }
 }
