@@ -13,7 +13,7 @@ namespace orderSorter
         
         private List <Product> _products;
         private List<Order> _orders;
-        
+        private List<Timeslot> timeslotsKitchen;
         private List<Deliverer> _deliverers;
         private List<Customer> _customers;
 

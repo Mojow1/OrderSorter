@@ -1,21 +1,23 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.VisualBasic;
 
 namespace orderSorter
 {
     public class Order
     {
         private int _id;
-        private Customer _customer;
         private DateTime _orderDate;
-        private Priority _priority;
+        private bool _priority;
         private List<ProductQuantity > _productsQuantity;
         private double _totalPrice;
+        private int _orderSize;
         
-        public Order(int id, Customer customer, DateTime orderDate, Priority priority, List<ProductQuantity> productsQuantity)
+        
+        public Order(int id, Customer customer, DateTime orderDate, bool priority, List<ProductQuantity> productsQuantity)
         {
             _id = id;
-            _customer = customer;
+            Customer = customer;
             _orderDate = orderDate;
             _priority = priority;
             _productsQuantity =productsQuantity;
@@ -24,28 +26,33 @@ namespace orderSorter
         
         public int Id => _id;
 
-        public Customer Customer => _customer;
+        public Customer Customer { get; }
 
         public DateTime OrderDate => _orderDate;
 
-        public Priority Priority => _priority;
+        public bool Priority => _priority;
 
         public List<ProductQuantity> ProductsQuantity => _productsQuantity;
 
         public double TotalPrice => _totalPrice;
+
+        public int OrderSize => _orderSize;
+        
 
 
         // Method to determine totalprice of the order
         public double CalculateTotalPrice(List<ProductQuantity> productsAndQuantity)
         {
             double price=0;
+            int size = 0;
+            
             if (productsAndQuantity.Count > 1)
             {
                 foreach (var v  in productsAndQuantity)
                 {
                     price = price + v.Product.Price * v.Quantity;
+                    _orderSize = _orderSize + v.Quantity;
                 }
-                
             }
             else
             {
