@@ -1,13 +1,15 @@
+using System.Collections.Generic;
+
 namespace orderSorter.Businesslogic.Algoritme
 {
     public class Context
     {
         private IStrategy _strategy;
 
-        public void SetStrategy(IStrategy strategy)
+        public List<Timeslot> SetStrategy(IStrategy strategy)
         {
             
-            strategy.Execute();
+            return strategy.Execute();
         }
        
     }

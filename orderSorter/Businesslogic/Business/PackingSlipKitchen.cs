@@ -1,18 +1,24 @@
+using System;
+
 namespace orderSorter
 {
     public class PackingSlipKitchen
     {
-        private Order _order;
+        private DateTime _startTimePreparing;
         private int _minutesToPrepare;
+        private DateTime _endTimePreparing;
 
-        public PackingSlipKitchen(Order order, int minutesToPrepare)
+        public PackingSlipKitchen(DateTime startTimePreparing, int minutesToPrepare)
         {
-            _order = order;
+            _startTimePreparing = startTimePreparing;
             _minutesToPrepare = minutesToPrepare;
+            _endTimePreparing = startTimePreparing.AddMinutes(minutesToPrepare);
         }
-
-        public Order Order => _order;
-
+        
         public int MinutesToPrepare => _minutesToPrepare;
+
+        public DateTime StartTimePreparing => _startTimePreparing;
+
+        public DateTime EndTimePreparing => _endTimePreparing;
     }
 }

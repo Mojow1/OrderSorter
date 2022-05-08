@@ -12,6 +12,7 @@ namespace orderSorter
         private List<ProductQuantity > _productsQuantity;
         private double _totalPrice;
         private int _orderSize;
+        private PackingSlipKitchen _packingSlipKitchen;
         
         
         public Order(int id, Customer customer, DateTime orderDate, bool priority, List<ProductQuantity> productsQuantity)
@@ -37,7 +38,12 @@ namespace orderSorter
         public double TotalPrice => _totalPrice;
 
         public int OrderSize => _orderSize;
-        
+
+        public PackingSlipKitchen PackingSlipKitchen
+        {
+            get => _packingSlipKitchen;
+            set => _packingSlipKitchen = value;
+        }
 
 
         // Method to determine totalprice of the order

@@ -7,43 +7,41 @@ namespace orderSorter
     public class Timeslot
     {
         private int timeslotMax;
-        private int timeslotCurrent;
         private int timeslotTime;
-        private List<Order> timeslotOrders;
         private DateTime start;
         private DateTime end;
-        private List<PackingSlipKitchen> _packingSlipKitchens;
+        private List<Order> timeslotOrders;
+        
+        
+        
+        
+        public Timeslot(int timeslotMax, int timeslotTime, DateTime start, DateTime en , List<Order> timeslotOrders)
+        {
+            this.TimeslotMax = timeslotMax;
+            this.TimeslotTime = timeslotTime;
+            this.Start = start;
+            this.End = end;
+            this.TimeslotOrders = timeslotOrders;
+        }
 
         public Timeslot(int timeslotMax, int timeslotCurrent, int timeslotTime, List<Order> timeslotOrders)
         {
-            this.timeslotMax = timeslotMax;
-            this.timeslotCurrent = timeslotCurrent;
-            this.timeslotTime = timeslotTime;
-            this.timeslotOrders = timeslotOrders;
+            this.TimeslotMax = timeslotMax;
+            this.TimeslotCurrent = timeslotCurrent;
+            this.TimeslotTime = timeslotTime;
+            this.TimeslotOrders = timeslotOrders;
         }
 
-        public int TimeslotMax => timeslotMax;
+        public int TimeslotMax { get; }
 
-        public int TimeslotCurrent => timeslotCurrent;
+        public int TimeslotCurrent { get; }
 
-        public int TimeslotTime => timeslotTime;
+        public int TimeslotTime { get; }
 
-        public DateTime Start
-        {
-            get => start;
-            set => start = value;
-        }
+        public DateTime Start { get; set; }
 
-        public DateTime End
-        {
-            get => end;
-            set => end = value;
-        }
+        public DateTime End { get; set; }
 
-        public List<Order> TimeslotOrders
-        {
-            get => timeslotOrders;
-            set => timeslotOrders = value;
-        }
+        public List<Order> TimeslotOrders { get; set; }
     }
 }
