@@ -6,35 +6,55 @@ namespace orderSorter
 {
     public class Timeslot
     {
-        private int timeslotMax;
-        private int timeslotTime;
-        private DateTime start;
-        private DateTime end;
-        private List<Order> timeslotOrders;
+        private int _timeslotMax;
+        private int _timeslotTime;
+        private int _timeslotCurrent;
+        private DateTime _start;
+        private DateTime _end;
+        private List<Order> _timeslotOrders; 
+        private List<Order> _timeslotOrdersOverMax;
         
         
         
         
-        public Timeslot(int timeslotMax, int timeslotTime, DateTime start, DateTime en , List<Order> timeslotOrders)
+        
+        public Timeslot(int timeslotMax, int timeslotTime, DateTime start, DateTime end )
         {
-            this.TimeslotMax = timeslotMax;
-            this.TimeslotTime = timeslotTime;
-            this.Start = start;
-            this.End = end;
-            this.TimeslotOrders = timeslotOrders;
+            _timeslotMax = timeslotMax;
+            _timeslotTime = timeslotTime;
+            _start = start;
+            _end = end;
+           
+     
         }
 
         public Timeslot(int timeslotMax, int timeslotCurrent, int timeslotTime, List<Order> timeslotOrders)
         {
-            this.TimeslotMax = timeslotMax;
-            this.TimeslotCurrent = timeslotCurrent;
-            this.TimeslotTime = timeslotTime;
-            this.TimeslotOrders = timeslotOrders;
+            _timeslotMax = timeslotMax;
+            _timeslotCurrent = timeslotCurrent;
+            _timeslotTime = timeslotTime;
+            _timeslotOrders = timeslotOrders;
+          
+
         }
+
+
+        public List<Order> TimeslotOrdersOverMax
+        {
+            get => _timeslotOrdersOverMax;
+            set => _timeslotOrdersOverMax = value;
+        }
+
 
         public int TimeslotMax { get; }
 
-        public int TimeslotCurrent { get; }
+
+        public int TimeslotCurrent
+        {
+            get => _timeslotCurrent;
+            set => _timeslotCurrent = value;
+        }
+
 
         public int TimeslotTime { get; }
 

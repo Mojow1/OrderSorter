@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using Castle.Core.Internal;
 using Microsoft.VisualBasic;
@@ -10,22 +11,19 @@ namespace orderSorter.Businesslogic.Algoritme
     public class StrategyKitchenLimit : IStrategy
     {
         private List<Order> _orders;
-        private List<Timeslot> _sortedKitchenTimeslots;
+        private List<Timeslot> _timeslots;
         private List<PackingSlipKitchen> _packingSlipKitchens;
         private List<Order> _cancelledOrders;
         
         
 
         // constructor
-        public StrategyKitchenLimit(List<Order> orders, List<Timeslot> sortedKitchenTimeslots)
+        public StrategyKitchenLimit(List<Order> orders, List<Timeslot> timeslots)
         {
             _orders = orders;
-            _sortedKitchenTimeslots = sortedKitchenTimeslots;
+            _timeslots = timeslots;
+            _cancelledOrders = new List<Order>();
         }
-        
-        
-        
-        
         
         // Execute method
         public List<Timeslot >Execute()
@@ -34,17 +32,10 @@ namespace orderSorter.Businesslogic.Algoritme
             //check if timeslot is full yes-add to timeslot no-check next timeslot 
             //add to timeslot 
             
-            List<Timeslot> assignedTimeSlots = AssignToTimeSlot();
-           return CalculateProcessingTime(assignedTimeSlots);
+        return AssignToTimeSlot(_orders);
+          // return CalculateProcessingTime(assignedTimeSlots);
 
-       
         }
-        
-        
-        
-        
-        
-
 
         public List<Timeslot> CalculateProcessingTime(List<Timeslot> assignedTimeslots)
         {
@@ -65,8 +56,6 @@ namespace orderSorter.Businesslogic.Algoritme
                             int waitingTimeKitchen = timeslot.Start.Minute - order.OrderDate.Minute;
                             PackingSlipKitchen packingSlip = new PackingSlipKitchen(timeslot.Start, preparingTime + waitingTimeKitchen);
                         }
-                        
-                       
                     }
 
             }
@@ -75,52 +64,32 @@ namespace orderSorter.Businesslogic.Algoritme
         }
 
 
-        public List<Timeslot> AssignToTimeSlot()
-        {
-            
-            List<Timeslot> sortedKitchenTimeslots =
-               _sortedKitchenTimeslots.OrderBy(timeslot => timeslot.TimeslotTime).ToList();
+        public List<Timeslot> AssignToTimeSlot(List<Order> orders )
+        { 
+          
 
-            List<Order> sortedOrders = _orders.OrderBy(o => o.OrderDate).ToList();
-            
- 
-            for (int i = 0; i < _sortedKitchenTimeslots.Count; i++)
+            for (int i = 0; i < orders.Count; i++)
             {
-                
-                for (int j = 0; j < _orders.Count; j++)
+                for (int j = 0; j < _timeslots.Count; j++)
                 {
-                    if (_orders[j].OrderDate > _sortedKitchenTimeslots[i].Start && _orders[j].OrderDate < _sortedKitchenTimeslots[i].End
-                        && _sortedKitchenTimeslots[i].TimeslotOrders.Count < _sortedKitchenTimeslots[i].TimeslotMax)
+                    if (orders[i].OrderDate > _timeslots[j].Start && orders[i].OrderDate < _timeslots[j].End && _timeslots[j].TimeslotOrders.Count < _timeslots[j].TimeslotMax )
                     {
-                        if (_sortedKitchenTimeslots[i].TimeslotOrders.IsNullOrEmpty())
-                        {
-                            new List<Order>().Add(_orders[1]);
-              
-                        }
-
-                        else
-                        {
-                            _sortedKitchenTimeslots[i].TimeslotOrders.Add(_orders[1]);
-                        }
+                        _timeslots[j].TimeslotOrders.Add(orders[i]);
+                        Console.WriteLine("addedtotime");
+                        break;
+                    }
+                    
+                    else {
+                        _cancelledOrders.Add(orders[i]);
+                        Console.WriteLine("addedtocancelledorder");
                         
-                     
+                   break;
                     }
                     
-                    
-
-                    else
-                    {
-                        //_cancelledOrders.Add(_orders[i]);
-                    }
                 }
                 
             }
-            
-
-            return _sortedKitchenTimeslots;
-
-
-
+            return _timeslots;
         }
     }
     
