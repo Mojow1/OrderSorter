@@ -12,7 +12,6 @@ namespace orderSorter.Businesslogic.Algoritme
     {
         private List<Order> _orders;
         private List<Timeslot> _timeslots;
-        private List<PackingSlipKitchen> _packingSlipKitchens;
         private List<Order> _cancelledOrders;
         
         
@@ -32,51 +31,51 @@ namespace orderSorter.Businesslogic.Algoritme
             //check if timeslot is full yes-add to timeslot no-check next timeslot 
             //add to timeslot 
             
-        return AssignToTimeSlot(_orders);
-          // return CalculateProcessingTime(assignedTimeSlots);
+        List<Timeslot> lijst = AssignToTimeSlot(_orders, _timeslots);
+        return lijst;
+        
 
         }
-
-        public List<Timeslot> CalculateProcessingTime(List<Timeslot> assignedTimeslots)
+        
+        public List<Timeslot> AssignToTimeSlot(List<Order> orders, List<Timeslot> _timeslots)
         {
-            int preparingTime = 0;
-            foreach (var timeslot in assignedTimeslots)
-            {
-          
-                    foreach (var order in timeslot.TimeslotOrders)
-                    {
-                        if (order.OrderDate < timeslot.End && order.OrderDate > timeslot.Start)
-                        {
-                            PackingSlipKitchen packingSlip = new PackingSlipKitchen(order.OrderDate, preparingTime);
-                            order.PackingSlipKitchen = packingSlip;
-                        }
-                        
-                        else if (order.OrderDate < timeslot.Start)
-                        {
-                            int waitingTimeKitchen = timeslot.Start.Minute - order.OrderDate.Minute;
-                            PackingSlipKitchen packingSlip = new PackingSlipKitchen(timeslot.Start, preparingTime + waitingTimeKitchen);
-                        }
-                    }
-
-            }
-
-            return assignedTimeslots;
-        }
-
-
-        public List<Timeslot> AssignToTimeSlot(List<Order> orders )
-        { 
-          
-
+            
             for (int i = 0; i < orders.Count; i++)
             {
                 for (int j = 0; j < _timeslots.Count; j++)
                 {
-                    if (orders[i].OrderDate > _timeslots[j].Start && orders[i].OrderDate < _timeslots[j].End && _timeslots[j].TimeslotOrders.Count < _timeslots[j].TimeslotMax )
+                    if (orders[i].OrderDate > _timeslots[j].Start && orders[i].OrderDate < _timeslots[j].End && _timeslots[j].TimeslotMax > _timeslots[j].TimeslotOrders.Count)
                     {
                         _timeslots[j].TimeslotOrders.Add(orders[i]);
-                        Console.WriteLine("addedtotime");
+                        Console.WriteLine("addedtotimeSlot1");
                         break;
+                    }
+                    
+                    else if (_timeslots[j + 1].TimeslotMax > _timeslots[j + 1].TimeslotOrders.Count)
+
+                    {
+                        _timeslots[j+1].TimeslotOrders.Add(orders[i]);
+                        Console.WriteLine("addedtotimeSlot2");
+                        break;
+                        
+                    }
+                    
+                    else if (_timeslots[j + 2].TimeslotMax > _timeslots[j + 2].TimeslotOrders.Count)
+
+                    {
+                        _timeslots[j+2].TimeslotOrders.Add(orders[i]);
+                        Console.WriteLine("addedtotimeSlot3");
+                        break;
+                        
+                    }
+                    
+                    else if (_timeslots[j + 3].TimeslotMax > _timeslots[j + 3].TimeslotOrders.Count)
+
+                    {
+                        _timeslots[j+3].TimeslotOrders.Add(orders[i]);
+                        Console.WriteLine("addedtotimeSlot4");
+                        break;
+                        
                     }
                     
                     else {
@@ -85,13 +84,15 @@ namespace orderSorter.Businesslogic.Algoritme
                         
                    break;
                     }
-                    
                 }
                 
             }
             return _timeslots;
         }
     }
+    
+
+    
     
     
 }

@@ -70,6 +70,7 @@ namespace orderSorter
 
                    
            
+           
             Timeslot timeslot2 = new Timeslot(3, 1, time2, time3);
             Timeslot timeslot3 = new Timeslot(3, 2, time3, time4);
 
@@ -90,18 +91,7 @@ namespace orderSorter
             
             
             List<Timeslot> timeslots = new List<Timeslot>();
-            /*timeslots.Add(timeslot2);
-            timeslots.Add(timeslot3);
-            timeslots.Add(timeslot4);
-            timeslots.Add(timeslot5);
-            timeslots.Add(timeslot6);
-            timeslots.Add(timeslot7);
-            timeslots.Add(timeslot8);*/
-
- 
-            
-     
-
+         
             timeslots.Add(new Timeslot(3, 1, time1, time2));
             timeslots.Add(new Timeslot(3, 2, time2, time3));
             timeslots.Add(new Timeslot(3, 3, time3, time4));
@@ -124,17 +114,25 @@ namespace orderSorter
 
 
             
-            IStrategy kitchen = new StrategyKitchenLimit(orders, timeslots);
-            Context context = new Context();
-            List<Timeslot> calculated = context.SetStrategy(kitchen);
-            Console.WriteLine("test");
+           IStrategy kitchen = new StrategyKitchenLimit(orders, timeslots);
+           Context context = new Context();
+           context.SetStrategy(kitchen);
 
-            
-            
 
-            
+   
 
-           
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
         
