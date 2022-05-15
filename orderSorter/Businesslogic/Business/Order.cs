@@ -12,6 +12,7 @@ namespace orderSorter
         private List<ProductQuantity > _productsQuantity;
         private double _totalPrice;
         private int _orderSize;
+        private DateTime _timeDifference;
         private PackingSlipKitchen _packingSlipKitchen;
         
         
@@ -23,6 +24,7 @@ namespace orderSorter
             _priority = priority;
             _productsQuantity =productsQuantity;
             _totalPrice = CalculateTotalPrice(productsQuantity);
+            _timeDifference = orderDate.AddHours(2);
         }
         
         public int Id => _id;
@@ -44,6 +46,8 @@ namespace orderSorter
             get => _packingSlipKitchen;
             set => _packingSlipKitchen = value;
         }
+
+        public DateTime TimeDifference => _timeDifference;
 
 
         // Method to determine totalprice of the order

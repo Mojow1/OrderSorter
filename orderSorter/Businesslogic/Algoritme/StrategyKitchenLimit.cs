@@ -13,8 +13,8 @@ namespace orderSorter.Businesslogic.Algoritme
         private List<Order> _orders;
         private List<Timeslot> _timeslots;
         private List<Order> _cancelledOrders;
-        
-        
+
+
 
         // constructor
         public StrategyKitchenLimit(List<Order> orders, List<Timeslot> timeslots)
@@ -23,76 +23,130 @@ namespace orderSorter.Businesslogic.Algoritme
             _timeslots = timeslots;
             _cancelledOrders = new List<Order>();
         }
-        
+
         // Execute method
-        public List<Timeslot >Execute()
+        public List<Timeslot> Execute()
         {
-           
+
             //check if timeslot is full yes-add to timeslot no-check next timeslot 
             //add to timeslot 
-            
-        List<Timeslot> lijst = AssignToTimeSlot(_orders, _timeslots);
-        return lijst;
-        
+
+            List<Timeslot> lijst = AssignToTimeSlot(_orders, _timeslots);
+            return lijst;
+
 
         }
-        
+
         public List<Timeslot> AssignToTimeSlot(List<Order> orders, List<Timeslot> _timeslots)
         {
-            
+
             for (int i = 0; i < orders.Count; i++)
             {
-                for (int j = 0; j < _timeslots.Count; j++)
+                Console.WriteLine("Processing order " + i);
+                if (!CheckTimeSlots(orders[i], _timeslots))
                 {
-                    if (orders[i].OrderDate > _timeslots[j].Start && orders[i].OrderDate < _timeslots[j].End && _timeslots[j].TimeslotMax > _timeslots[j].TimeslotOrders.Count)
-                    {
-                        _timeslots[j].TimeslotOrders.Add(orders[i]);
-                        Console.WriteLine("addedtotimeSlot1");
-                        break;
-                    }
-                    
-                    else if (_timeslots[j + 1].TimeslotMax > _timeslots[j + 1].TimeslotOrders.Count)
+                    _cancelledOrders.Add(orders[i]);
+                    Console.WriteLine("order time out of working time ");
 
-                    {
-                        _timeslots[j+1].TimeslotOrders.Add(orders[i]);
-                        Console.WriteLine("addedtotimeSlot2");
-                        break;
-                        
-                    }
-                    
-                    else if (_timeslots[j + 2].TimeslotMax > _timeslots[j + 2].TimeslotOrders.Count)
-
-                    {
-                        _timeslots[j+2].TimeslotOrders.Add(orders[i]);
-                        Console.WriteLine("addedtotimeSlot3");
-                        break;
-                        
-                    }
-                    
-                    else if (_timeslots[j + 3].TimeslotMax > _timeslots[j + 3].TimeslotOrders.Count)
-
-                    {
-                        _timeslots[j+3].TimeslotOrders.Add(orders[i]);
-                        Console.WriteLine("addedtotimeSlot4");
-                        break;
-                        
-                    }
-                    
-                    else {
-                        _cancelledOrders.Add(orders[i]);
-                        Console.WriteLine("addedtocancelledorder");
-                        
-                   break;
-                    }
                 }
                 
             }
+
+
+
+
+
+
             return _timeslots;
         }
-    }
-    
 
-    
+
+        public bool CheckTime(Order order, Timeslot timeSlot)
+        {
+           
+            if (order.OrderDate >= timeSlot.Start && order.OrderDate < timeSlot.End)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CheckMax(Timeslot timeSlot)
+        {
+            if (timeSlot.TimeslotMax > timeSlot.TimeslotOrders.Count)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CheckTimeSlots(Order order, List<Timeslot> timeSlots)
+        {
+            for (int j = 0; j < timeSlots.Count; j++)
+            {
+                if (CheckTime(order, timeSlots[j]) && CheckMax(timeSlots[j]))
+                {
+                    timeSlots[j].TimeslotOrders.Add(order);
+                    Console.WriteLine("addedtotimeSlot :" + j);
+                    return true;
+                }
+               
+                /*if (CheckOverTime(order, timeSlots[j]))
+                {
+                    for (int i=1; i < 2; i++)
+                    {
+                        if (j + i >= timeSlots.Count)
+                        {
+                            break;
+                            
+                        }
+                        DateTime time = timeSlots[j].Start;
+                        time.AddHours(i);
+                        
+                        if (CheckTime(order, timeSlots[j+i]) && CheckMax(timeSlots[j+i]))
+                        {
+                            timeSlots[j+i].TimeslotOrders.Add(order);
+                            Console.WriteLine("addedtotimeSlot :" + j);
+                            return true;
+                        }
+                    }
+                }*/
+                
+                    
+                
+                
+
+
+                else if (CheckTime(order, timeSlots[j]) && CheckMax(timeSlots[j]) == false)
+                {
+                 
+                    _cancelledOrders.Add(order);
+                    Console.WriteLine("timeslot if full");
+                    return true;
+                }
+           
+
+
+            }
+
+            return false;
+
+        }
+        
+        public bool CheckOverTime(Order order, Timeslot timeSlot)
+        {
+
+            
+            if (timeSlot.Start.CompareTo(order.TimeDifference) < 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
     
     
 }

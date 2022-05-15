@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Update.Internal;
+using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 using orderSorter.Businesslogic.Algoritme;
 using orderSorter.DatabaseMySQL;
@@ -41,19 +42,7 @@ namespace orderSorter
             demanded.Add(product3);
 
             Priority priority = new Priority(false);
-            Order order = new Order(1, customer, new DateTime(2022, 5, 8, 16, 15, 0), true, demanded);
-            Order order2 = new Order(2, customer, new DateTime(2022, 5, 8, 16, 16, 0), true, demanded);
-            Order order3 = new Order(3, customer, new DateTime(2022, 5, 8, 16, 17, 0), true, demanded);
 
-            Order order4 = new Order(4, customer, new DateTime(2022, 5, 8, 16, 18, 0), true, demanded);
-            Order order5 = new Order(5, customer, new DateTime(2022, 5, 8, 16, 19, 0), true, demanded);
-            Order order6 = new Order(6, customer, new DateTime(2022, 5, 8, 16, 20, 0), true, demanded);
-
-            Order order7 = new Order(7, customer, new DateTime(2022, 5, 8, 16, 21, 0), true, demanded);
-            Order order8 = new Order(8, customer, new DateTime(2022, 5, 8, 16, 22, 0), true, demanded);
-            Order order9 = new Order(9, customer, new DateTime(2022, 5, 8, 16, 33, 0), true, demanded);
-
-            Order order10 = new Order(10, customer, new DateTime(2022, 5, 8, 16, 40, 0), true, demanded);
 
             DateTime time1 = new DateTime(2022, 5, 8, 16, 0, 0);
             DateTime time2 = new DateTime(2022, 5, 8, 17, 0, 0);
@@ -67,10 +56,7 @@ namespace orderSorter
             
             
             
-
-                   
-           
-           
+            
             Timeslot timeslot2 = new Timeslot(3, 1, time2, time3);
             Timeslot timeslot3 = new Timeslot(3, 2, time3, time4);
 
@@ -81,13 +67,18 @@ namespace orderSorter
             Timeslot timeslot8 = new Timeslot(3, 7, time8, time9);
 
             List<Order> orders= new List<Order>();
-            List<Order> orders2 = new List<Order>();
-            List<Order> orders3 = new List<Order>();
-            List<Order> orders4 = new List<Order>();
-            List<Order> orders5 = new List<Order>();
-            List<Order> orders6 = new List<Order>();
-            List<Order> orders7 = new List<Order>();
-            List<Order> orders8 = new List<Order>();
+            
+
+            for (int i = 0; i < 60; i++)
+            {
+
+               DateTime ti = new DateTime(2022, 5, 8, 16, 0, 0);
+               ti = ti.AddMinutes(15 * i);
+                orders.Add(new Order(i, customer, ti, true, demanded));
+               
+             
+                Console.WriteLine(orders[i].OrderDate);
+            }
             
             
             List<Timeslot> timeslots = new List<Timeslot>();
@@ -101,23 +92,12 @@ namespace orderSorter
             timeslots.Add(new Timeslot(3, 7, time7, time8));
             timeslots.Add(new Timeslot(3, 8, time8, time9));
 
-            orders.Add(order);
-            orders.Add(order2);
-            orders.Add(order3);
-            orders.Add(order4);
-            orders.Add(order5);
-            orders.Add(order6);
-            orders.Add(order7);
-            orders.Add(order8);
-            orders.Add(order9);
-            orders.Add(order10);
-
 
             
            IStrategy kitchen = new StrategyKitchenLimit(orders, timeslots);
            Context context = new Context();
            context.SetStrategy(kitchen);
-
+           Console.WriteLine("done");
 
    
 

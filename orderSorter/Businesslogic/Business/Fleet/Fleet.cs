@@ -4,17 +4,17 @@ namespace orderSorter
 {
     public class Fleet
     {
-        private List<Vehicle> _deliveryVehicles;
+        private List<IDeliver> _deliveryVehicles;
 
-        public Fleet(List<Vehicle> deliveryVehicles)
+        public Fleet(List<IDeliver> deliveryVehicles)
         {
             _deliveryVehicles = deliveryVehicles;
         }
 
-        public List<Vehicle> DeliveryVehicles => _deliveryVehicles;
+        public List<IDeliver> DeliveryVehicles => _deliveryVehicles;
 
 
-        public void addVehicle(Vehicle vehicle)
+        public void addVehicle(IDeliver vehicle)
         {
             _deliveryVehicles.Add(vehicle);
         }
