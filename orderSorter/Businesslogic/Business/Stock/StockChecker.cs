@@ -7,6 +7,7 @@ namespace orderSorter
 {
     public class StockChecker
     {
+        /*
         private Order _order;
         private Stock _stock;
         
@@ -51,7 +52,8 @@ namespace orderSorter
             }
             
             return true;
+            */
 
-        }
+        //}
     }
 }

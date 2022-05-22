@@ -4,18 +4,14 @@ namespace orderSorter
 {
     public class Stock
     {
-        private List<ProductQuantity> _productQuantity;
-        
-        
-        public Stock(List<ProductQuantity> productQuantity)
+        private Dictionary<Product, int> products;
+
+        public Stock(Dictionary<Product, int> products) // Constructor
         {
-            _productQuantity = productQuantity;
+            this.products = products;
         }
-        
-        
-        public List<ProductQuantity> ProductsQuantity
-        {
-            get => _productQuantity;
-        }
+
+
+        public Dictionary<Product, int> Products => products; // Gets productQuantity in stock
     }
 }

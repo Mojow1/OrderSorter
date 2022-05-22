@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using orderSorter.Businesslogic.Business;
 
 namespace orderSorter.Businesslogic.Algoritme
 {
@@ -14,9 +15,12 @@ namespace orderSorter.Businesslogic.Algoritme
             _timeslots = timeslots;
         }
 
-        public List<Timeslot> Execute()
+        public List<Timeslot> Sort(List<Order> orders)
         {
             throw new System.NotImplementedException();
         }
+
+        public List<Timeslot> TimeSlots { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

@@ -9,24 +9,25 @@ namespace orderSorter
         private int _id;
         private DateTime _orderDate;
         private bool _priority;
-        private List<ProductQuantity > _productsQuantity;
         private double _totalPrice;
         private int _orderSize;
         private DateTime _timeDifference;
-        private PackingSlipKitchen _packingSlipKitchen;
-        
-        
-        public Order(int id, Customer customer, DateTime orderDate, bool priority, List<ProductQuantity> productsQuantity)
+        private Dictionary<Product, int> products;
+
+
+
+
+        public Order(int id, Customer customer, DateTime orderDate, bool priority, Dictionary<Product, int> products)
         {
             _id = id;
             Customer = customer;
             _orderDate = orderDate;
             _priority = priority;
-            _productsQuantity =productsQuantity;
-            _totalPrice = CalculateTotalPrice(productsQuantity);
+            this.products = products;
             _timeDifference = orderDate.AddHours(2);
+            _totalPrice = CalculateTotalPrice(products);
         }
-        
+
         public int Id => _id;
 
         public Customer Customer { get; }
@@ -34,34 +35,30 @@ namespace orderSorter
         public DateTime OrderDate => _orderDate;
 
         public bool Priority => _priority;
-
-        public List<ProductQuantity> ProductsQuantity => _productsQuantity;
+        
 
         public double TotalPrice => _totalPrice;
 
         public int OrderSize => _orderSize;
 
-        public PackingSlipKitchen PackingSlipKitchen
-        {
-            get => _packingSlipKitchen;
-            set => _packingSlipKitchen = value;
-        }
+    
 
         public DateTime TimeDifference => _timeDifference;
 
 
         // Method to determine totalprice of the order
-        public double CalculateTotalPrice(List<ProductQuantity> productsAndQuantity)
+          public double CalculateTotalPrice (Dictionary<Product, int> products)
         {
             double price=0;
             int size = 0;
-            
-            if (productsAndQuantity.Count > 1)
+
+
+            if (products.Count > 0)
             {
-                foreach (var v  in productsAndQuantity)
+                foreach (var product in products)
                 {
-                    price = price + v.Product.Price * v.Quantity;
-                    _orderSize = _orderSize + v.Quantity;
+                    price = price + product.Key.Price * product.Value;
+                    _orderSize = _orderSize + product.Value;
                 }
             }
             else

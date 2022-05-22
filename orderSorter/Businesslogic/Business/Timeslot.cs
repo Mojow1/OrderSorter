@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.VisualBasic;
 
-namespace orderSorter
+namespace orderSorter.Businesslogic.Business
 {
     public class Timeslot
     {
         private int _timeslotMax;
         private int _timeslotTime;
-        private int _timeslotCurrent;
         private DateTime _start;
         private DateTime _end;
         private List<Order> _timeslotOrders; 
-        private List<Order> _timeslotOrdersOverMax;
+
 
 
         public Timeslot(int timeslotMax, int timeslotTime, DateTime start, DateTime end)
@@ -31,11 +29,8 @@ namespace orderSorter
             set => _timeslotMax = value;
         }
 
-        public int TimeslotTime
-        {
-            get => _timeslotTime;
-            set => _timeslotTime = value;
-        }
+        public int TimeslotTime => _timeslotTime;
+
 
         public DateTime Start
         {
@@ -54,11 +49,6 @@ namespace orderSorter
             get => _timeslotOrders;
             set => _timeslotOrders = value;
         }
-
-        public List<Order> TimeslotOrdersOverMax
-        {
-            get => _timeslotOrdersOverMax;
-            set => _timeslotOrdersOverMax = value;
-        }
+        
     }
 }
