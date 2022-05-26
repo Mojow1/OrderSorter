@@ -1,30 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using orderSorter.Businesslogic.Business;
+using Org.BouncyCastle.Crypto.Parameters;
 
 namespace orderSorter.Businesslogic.Algoritme.ListSorter
 {
     public class SortsBySize : IListSorter
     {
-        public List<Order> SortList(List<Order> orders)
+        public List<IOrder> SortList(List<IOrder> orders)
         {
-            orders.Sort((x,y) =>
-            {
-                var ret = x.OrderDate.Hour.CompareTo(y.OrderDate.Hour);
-                
-                if (ret == 0) ret = y.TotalPrice.CompareTo(x.TotalPrice);
-                {
-                    
-                    return ret;
-                }});
             
-            Console.WriteLine();
-            Console.WriteLine();
-            
-            for (int i = 0; i < orders.Count; i++)
+            orders.Sort(delegate(IOrder order1, IOrder order2)
             {
-                Console.WriteLine(orders[i].OrderDate + "     size: "+ orders[i].TotalPrice);
-                
-            }
+                int r = order1.OrderDate.Day.CompareTo(order2.OrderDate.Day);
+                if (r == 0) r = order2.OrderWeight.CompareTo(order1.OrderWeight);
+                if (r == 0) r = order1.OrderDate.Hour.CompareTo(order2.OrderDate.Hour);
+               
+                return r;
+            });
 
             return orders;
         }

@@ -16,14 +16,17 @@ namespace orderSorter
         // sorteren op tijd en op grootte en wellicht rekening houden met volume
         static void Main(string[] args)
         {
-            List<Order> orders = GetOrders();
+            List<IOrder> orders = GetOrders();
 
-            IListSorter sortedByDate = new SortsByDate();
-            List<Order> sorted =  sortedByDate.SortList(orders);
+            //IListSorter sortedByDate = new SortsByDate();
+            //List<IOrder> sorted =  sortedByDate.SortList(orders);
+
+            IListSorter sortedBySize = new SortsBySize();
+            List<IOrder> sorted = sortedBySize.SortList(orders);
 
             for (int i = 0; i < sorted.Count; i++)
             {
-                Console.WriteLine("Id: " +sorted[i].Id + "   date:"+ sorted[i].OrderDate + "   price:" + sorted[i].TotalPrice);
+                Console.WriteLine("Id: " +sorted[i].Id + "   date:"+ sorted[i].OrderDate + "   price:" + sorted[i].OrderWeight);
             }
 
 
@@ -47,7 +50,7 @@ namespace orderSorter
 
         }
         
-        public static List<Order> GetOrders()
+        public static List<IOrder> GetOrders()
         {
             Customer customer = new Customer(1, "voornaam", "achternaam", "Straatnaam", 52, "6164VT", "Geleen");
 
@@ -55,33 +58,43 @@ namespace orderSorter
             Product p2 = new Product(2, "product2", 20);
             Product p3 = new Product(3, "product3", 30);
 
-            Dictionary<Product, int> products = new Dictionary<Product, int>()
-            {
-                {p1,4},
-                {p2,0},
-                 {p3,7}
 
-            };
+            List<IProduct> products = new List<IProduct>();
+            products.Add(p1);
+            products.Add(p2);
+            products.Add(p3);
+            products.Add(p3);
+            products.Add(p3);
+
+
+            List<IProduct> products2 = new List<IProduct>();
+            products2.Add(p1);
+            products2.Add(p2);
+            products2.Add(p3);
             
-            Dictionary<Product, int> products2 = new Dictionary<Product, int>()
-            {
-                {p1,3},
-                {p2,8},
-                {p3,4}
-
-            };
-
-
+            List<IProduct> products3 = new List<IProduct>();
+            products3.Add(p1);
+            products3.Add(p2);
+            products3.Add(p2);
+            products3.Add(p2);
+            
+         
 
 
                 // orders
-            List<Order> orders= new List<Order>();
+            List<IOrder> orders= new List<IOrder>();
           
-            for (int i = 0; i <30; i++)
+            for (int i = 0; i <20; i++)
             {
                 DateTime ti = new DateTime(2022, 5, 8, 16, 0, 0);
-                ti = ti.AddMinutes(15 * i);
-                orders.Add(new Order(i+1, customer, ti, true, products));
+                ti = ti.AddMinutes(7 * i);
+                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products));
+                ti = ti.AddMinutes(9 * i);
+                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products2));
+                ti = ti.AddMinutes(12 * i);
+                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products3));
+                
+                
             }
 
             return orders;

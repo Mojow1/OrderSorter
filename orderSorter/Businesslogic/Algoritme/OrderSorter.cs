@@ -4,23 +4,27 @@ using orderSorter.Businesslogic.Business;
 
 namespace orderSorter.Businesslogic.Algoritme
 {
+    // https://refactoring.guru/design-patterns/strategy
+    // https://refactoring.guru/design-patterns/template-method/csharp/example
     public class OrderSorter
     {
         private IStrategy _strategy;
-
-
-        public List<Timeslot> SortOrders(List<Order> orders)
-        {
-            List<Timeslot> timeSlots = _strategy.Sort(orders);
-
-            return timeSlots;
-        }
-
         
         public void SetStrategy(IStrategy strategy)
         {
             _strategy = strategy;
         }
+
+
+        public List<Timeslot> SortOrders(List<IOrder> orders)
+        {
+            List<Timeslot> timeSlots = _strategy.Execute(orders);
+
+            return timeSlots;
+        }
+
+        
+     
         
     }
 }

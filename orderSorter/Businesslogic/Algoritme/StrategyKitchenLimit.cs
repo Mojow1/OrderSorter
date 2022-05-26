@@ -13,23 +13,32 @@ namespace orderSorter.Businesslogic.Algoritme
     public class StrategyKitchenLimit : IStrategy
     {
         private List<Timeslot> _timeSlots;
-        private List<Order> _cancelledOrders;
+        private List<IOrder> _cancelledOrders;
         
-        public List<Timeslot> Sort(List<Order> orders)          // Sort method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
+        // constructor
+        public StrategyKitchenLimit( List<Timeslot> timeslots)
+        {
+            
+            _timeSlots = timeslots;
+            _cancelledOrders = new List<IOrder>();
+        }
+
+        
+        public List<Timeslot> Execute(List<IOrder> orders)          // Execute method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
         {
             
 
             for (int i = 0; i < orders.Count; i++)
             {
 
-                Assign(orders[i]);   // Gecheckt, hij loopt alle orders
+                Execute(orders[i]);   // Gecheckt, hij loopt alle orders
             }
             return _timeSlots;
         }
         
-        public void Assign(Order order)
+        public void Execute(IOrder order)
         {
-            List<Order> cancelled = new List<Order>();
+            List<IOrder> cancelled = new List<IOrder>();
             for (int i = 0; i < _timeSlots.Count; i++)
             {
                 if (CheckTime2(order, _timeSlots[i]) && CheckMax(_timeSlots[i]))
@@ -40,20 +49,21 @@ namespace orderSorter.Businesslogic.Algoritme
 
                 }
             }
-            cancelled.Add(order);
+            //cancelled.Add(order);
             //_cancelledOrders.Add(order);
 
-            _cancelledOrders = cancelled;
+            //_cancelledOrders = cancelled;
+            
             Console.WriteLine("order :" + order.Id +" cancelled ");
 
         }
 
         
-        public bool CheckTime(Order order, Timeslot timeSlot)
+        public bool CheckTime(IOrder order, Timeslot timeSlot)
         {
-            if (order.OrderDate.CompareTo(timeSlot.Start)>= 0 || timeSlot.Start.CompareTo(order.TimeDifference) <=0 ) 
+            if (order.OrderDate.CompareTo(timeSlot.Start)>= 0 || timeSlot.Start.CompareTo(order.AllowedEndTime) <=0 ) 
             {
-                if ( order.OrderDate.CompareTo(timeSlot.End)<0 || timeSlot.End.CompareTo(order.TimeDifference)>0)
+                if ( order.OrderDate.CompareTo(timeSlot.End)<0 || timeSlot.End.CompareTo(order.AllowedEndTime)>0)
                 {
                     return true;
                 }
@@ -61,9 +71,9 @@ namespace orderSorter.Businesslogic.Algoritme
             return false;
         }
 
-        public bool CheckTime2(Order order, Timeslot timeSlot)
+        public bool CheckTime2(IOrder order, Timeslot timeSlot)
         {
-            if (timeSlot.Start.CompareTo(order.TimeDifference) <=0 && order.OrderDate.CompareTo(timeSlot.End)<0 )
+            if (timeSlot.Start.CompareTo(order.AllowedEndTime) <=0 && order.OrderDate.CompareTo(timeSlot.End)<0 )
             {
                 return true;
             }
@@ -80,14 +90,7 @@ namespace orderSorter.Businesslogic.Algoritme
             return false;
         }
         
-        // constructor
-        public StrategyKitchenLimit( List<Timeslot> timeslots)
-        {
-            
-            _timeSlots = timeslots;
-            _cancelledOrders = new List<Order>();
-        }
-        
+    
         
         
         
