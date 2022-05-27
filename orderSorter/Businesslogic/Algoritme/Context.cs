@@ -6,7 +6,7 @@ namespace orderSorter.Businesslogic.Algoritme
 {
     // https://refactoring.guru/design-patterns/strategy
     // https://refactoring.guru/design-patterns/template-method/csharp/example
-    public class OrderSorter
+    public class Context
     {
         private IStrategy _strategy;
         

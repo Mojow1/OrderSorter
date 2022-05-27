@@ -40,7 +40,7 @@ namespace orderSorter.DatabaseMySQL
         }
 
         // Open Connection
-        public  bool OpenConnection()
+        public bool OpenConnection()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace orderSorter.DatabaseMySQL
         }
         
         // Close Connection
-        private bool CloseConnection()
+        public  bool CloseConnection()
         {
             try
             {
@@ -71,56 +71,7 @@ namespace orderSorter.DatabaseMySQL
             }
             return false;
         }
-        
-        public List<string>[] Select()
-        {
-            string query = "SELECT naam FROM customers ";
 
-            List<string>[] list = new List<string>[2];
-
-            DBConnection db = new DBConnection();
-
-            if (db.OpenConnection() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, _connection);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                while (dataReader.Read())
-                {
-                    list[0].Add((dataReader["id"]+ ""));
-                    list[1].Add((dataReader["naam"]+ " "));
-                }
-            
-                dataReader.Close();
-
-                CloseConnection();
-
-                return list;
-                
-            }
-
-            else
-            {
-                return list;
-            }
-            
-        }
-
-
-       
-        
-        
-        
-        
-        
-        
-
-        
-
-
-
-
-
-
+        public MySqlConnection Connection => _connection;
     }
 }

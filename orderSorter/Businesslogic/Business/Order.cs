@@ -31,6 +31,19 @@ namespace orderSorter
         }
 
 
+        // Constructor ten behoeve van database ophalen orders
+        public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, bool orderAccepted, int orderWeight, List<IProduct> products)
+        {
+            _id = id;
+            _orderDate = orderDate;
+            _allowedEndTime = allowedEndTime;
+            _priority = priority;
+            _orderAccepted = orderAccepted;
+            _orderWeight = orderWeight;
+            _products = products;
+        }
+
+
         public int Id => _id;
 
         public DateTime OrderDate => _orderDate;

@@ -31,14 +31,17 @@ namespace orderSorter
 
 
 
-            /*List<Timeslot> timeSlots = GetTimeSlots();
+            List<Timeslot> timeSlots = GetTimeSlots();
             
-             OrderSorter orderSorter = new OrderSorter();
+             Context context = new Context();
             IStrategy kitchen = new StrategyKitchenLimit(timeSlots);
 
 
-            orderSorter.SetStrategy(kitchen); 
-            List<Timeslot> slots =   orderSorter.SortOrders(orders);
+            context.SetStrategy(kitchen);
+            kitchen.GetCancelledOrders(); 
+
+
+            List<Timeslot> slots =   context.SortOrders(orders);
 
             for (int i = 0; i < slots.Count; i++)
             {
@@ -46,7 +49,7 @@ namespace orderSorter
                 {
                     Console.WriteLine("slot:"+ i + "       order:" + slots[i].TimeslotOrders[j].Id );
                 }
-            }*/
+            }
 
         }
         

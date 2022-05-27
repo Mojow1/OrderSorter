@@ -89,17 +89,18 @@ namespace orderSorter.Businesslogic.Algoritme
             }
             return false;
         }
-        
-    
-        
-        
-        
 
         
-        
-        
-        
+        public List<IOrder> GetCancelledOrders()
+        {
+            return _cancelledOrders;
+        }
 
+        public void CleanOrders()
+        {
+            _timeSlots.Clear();
+            _cancelledOrders.Clear();
+        }
     }
     
     
