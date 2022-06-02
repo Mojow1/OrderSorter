@@ -6,6 +6,8 @@ using Microsoft.VisualBasic;
 using orderSorter.Businesslogic.Algoritme;
 using orderSorter.Businesslogic.Algoritme.ListSorter;
 using orderSorter.Businesslogic.Business;
+using orderSorter.Businesslogic.Fleet;
+using orderSorter.Businesslogic.Interfaces;
 using orderSorter.DatabaseMySQL;
 
 namespace orderSorter
@@ -17,6 +19,17 @@ namespace orderSorter
         static void Main(string[] args)
         {
             List<IOrder> orders = GetOrders();
+
+            //List<Order> ord = orders.Cast<Order>().ToList();
+
+            //var or = ord.Cast<IOrder>().ToList();
+            
+            
+            
+
+
+
+
 
             //IListSorter sortedByDate = new SortsByDate();
             //List<IOrder> sorted =  sortedByDate.SortList(orders);
@@ -33,15 +46,19 @@ namespace orderSorter
 
             List<Timeslot> timeSlots = GetTimeSlots();
             
-             Context context = new Context();
-            IStrategy kitchen = new StrategyKitchenLimit(timeSlots);
+           
+            
+            
+            IAssignStrategy kitchen = new AssignKitchenLimitStrategy();
+
+            OrderAssigner orderAssigner = new OrderAssigner();
+
+            orderAssigner.SetStrategy(kitchen);
+            orderAssigner.AssignOrders(orders,timeSlots);
+            kitchen.GetCancelledOrders();
 
 
-            context.SetStrategy(kitchen);
-            kitchen.GetCancelledOrders(); 
-
-
-            List<Timeslot> slots =   context.SortOrders(orders);
+            List<Timeslot> slots = kitchen.GetTimeSlots();
 
             for (int i = 0; i < slots.Count; i++)
             {
@@ -50,7 +67,9 @@ namespace orderSorter
                     Console.WriteLine("slot:"+ i + "       order:" + slots[i].TimeslotOrders[j].Id );
                 }
             }
-
+          
+            
+            
         }
         
         public static List<IOrder> GetOrders()
@@ -119,4 +138,6 @@ namespace orderSorter
         
 
     }
+
+ 
 }
