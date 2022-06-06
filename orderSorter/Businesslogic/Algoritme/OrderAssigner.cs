@@ -17,9 +17,9 @@ namespace orderSorter.Businesslogic.Algoritme
         }
 
 
-        public void  AssignOrders(List<IOrder> orders, List<Timeslot> timeSlots)
+        public void  AssignOrders(List<IOrder> orders)
         {
-           _assignStrategy.AssignOrders(orders, timeSlots);
+           _assignStrategy.AssignOrders(orders);
            
         }
 

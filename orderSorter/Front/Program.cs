@@ -42,31 +42,11 @@ namespace orderSorter
                 Console.WriteLine("Id: " +sorted[i].Id + "   date:"+ sorted[i].OrderDate + "   price:" + sorted[i].OrderWeight);
             }
 
-
-
             List<Timeslot> timeSlots = GetTimeSlots();
             
            
             
-            
-            IAssignStrategy kitchen = new AssignKitchenLimitStrategy();
-
-            OrderAssigner orderAssigner = new OrderAssigner();
-
-            orderAssigner.SetStrategy(kitchen);
-            orderAssigner.AssignOrders(orders,timeSlots);
-            kitchen.GetCancelledOrders();
-
-
-            List<Timeslot> slots = kitchen.GetTimeSlots();
-
-            for (int i = 0; i < slots.Count; i++)
-            {
-                for (int j = 0; j < slots[i].TimeslotOrders.Count; j++)
-                {
-                    Console.WriteLine("slot:"+ i + "       order:" + slots[i].TimeslotOrders[j].Id );
-                }
-            }
+  
           
             
             
@@ -74,7 +54,7 @@ namespace orderSorter
         
         public static List<IOrder> GetOrders()
         {
-            Customer customer = new Customer(1, "voornaam", "achternaam", "Straatnaam", 52, "6164VT", "Geleen");
+    
 
             Product p1 = new Product(1, "product1", 10);
             Product p2 = new Product(2, "product2", 20);

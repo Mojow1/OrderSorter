@@ -17,15 +17,16 @@ namespace orderSorter.Businesslogic.Algoritme
         private List<IOrder> _cancelledOrders;
         
         // constructor
-        public AssignKitchenLimitStrategy()
+        public AssignKitchenLimitStrategy(int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax)
         {
+            _timeSlots = GenerateTimeSlots(intervalInMinutes,numberOfHours, startTimeSlots, timeSlotMax);
             _cancelledOrders = new List<IOrder>();
         }
 
         
-        public void AssignOrders(List<IOrder> orders, List<Timeslot> timeslots)          // AssignOrders method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
+        public void AssignOrders(List<IOrder> orders)          // AssignOrders method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
         {
-            _timeSlots = timeslots;
+           
             for (int i = 0; i < orders.Count; i++)
             {
                 Assign(orders[i]);   // Gecheckt, hij loopt alle orders
@@ -103,6 +104,37 @@ namespace orderSorter.Businesslogic.Algoritme
             _timeSlots.Clear();
             _cancelledOrders.Clear();
         }
+
+
+
+        private List<Timeslot> GenerateTimeSlots(int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax ) //// genereer
+        {
+            int numberOfTimeSlots = (60 / intervalInMinutes) * numberOfHours;
+            List<Timeslot> timeSlots = new List<Timeslot>();
+            DateTime time = startTimeSlots;
+
+            for (int i = 0; i <= numberOfTimeSlots; i++)
+            {
+                timeSlots.Add(new(timeSlotMax, i, time, time.AddMinutes(intervalInMinutes * i)));
+                time = time.AddMinutes(intervalInMinutes * i);
+
+            }
+
+
+            return timeSlots;
+        }
+        
+        
+        
+        /*List<Timeslot> timeSlots = new List<Timeslot>();
+        DateTime time = new DateTime(2022, 5, 8, 16, 0, 0);
+            for (int i = 0; i < 8; i++)
+        {
+            timeSlots.Add(new Timeslot( 3,i+1 ,time, time.AddHours(1)));
+            time = time.AddHours(1);
+        }
+
+    return timeSlots;*/
     }
     
     

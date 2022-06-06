@@ -24,8 +24,14 @@ namespace orderSorter
         }
 
         
-        public int Id => _id;
+        public int Id
+        {
+            get => _id;
+            set => _id = value;
+        }
+
         public string Name => _name;
         public int Weight => _weight;
+        public bool OutOfOrder { get; set; }
     }
 }

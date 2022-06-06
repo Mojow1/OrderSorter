@@ -11,6 +11,9 @@ namespace orderSorter.Businesslogic.Algoritme.ListSorter
     {
         public List<IOrder> SortList(List<IOrder> orders)
         {
+
+            List<IOrder> test = new List<IOrder>();
+            orders.OrderBy(x => x.OrderDate).ThenBy(x => x.OrderWeight).ToList();
             
             orders.Sort(delegate(IOrder order1, IOrder order2)
             {

@@ -1,10 +1,18 @@
 
+using System;
+using Org.BouncyCastle.Asn1.X509;
+
 namespace orderSorter.Businesslogic.Business.Staff
 {
     public interface IEmployee
     {
-        public int Capacity { get; set; }
-        public void Deliver();
+        public int Id { get; set; }
+        public string Name { get;  }
+        public string Function { get;  }
+        public bool Availability { get; set; }
+        public bool DriversLicenceA { get;  }
+        public bool DriversLicenceB { get;  }
+
 
 
 

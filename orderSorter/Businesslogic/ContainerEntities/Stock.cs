@@ -15,12 +15,15 @@ namespace orderSorter
 
         public void AddProduct(IProduct product)
         {
-            
+            int id = _products.Count + 1;
+            product.Id = id;
+            _products.Add(product);
         }
 
         public IProduct FetchProduct(int id)
         {
-            
+            int index = _products.FindIndex(x => x.Id == id);
+            return _products[index];
         }
 
         public List<IProduct> FetchAllProducts()
@@ -30,7 +33,8 @@ namespace orderSorter
 
         public void RemoveProduct(int id)
         {
-            
+            int index = _products.FindIndex(x => x.Id == id);
+            _products[index].OutOfOrder = true;
         }
 
 

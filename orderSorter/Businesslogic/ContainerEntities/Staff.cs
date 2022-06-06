@@ -15,12 +15,16 @@ namespace orderSorter.Businesslogic.Business.Staff
 
         public void AddEmployee(IEmployee employee)
         {
-            _employees.Add();
+            int id = _employees.Count + 1;
+            employee.Id = id;
+            _employees.Add(employee);
+
         }
 
         public IEmployee FetchEmployee(int id)
         {
-            
+            int index = _employees.FindIndex(x => x.Id == id);
+            return _employees[index];
         }
 
         public List<IEmployee> FetchAllEmployees()
@@ -30,7 +34,8 @@ namespace orderSorter.Businesslogic.Business.Staff
 
         public void RemoveEmployee(int id)
         {
-            
+            int index = _employees.FindIndex(x => x.Id == id);
+            _employees[index].Availability = false;
         }
     }
 }

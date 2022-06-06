@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using orderSorter.Businesslogic.Algoritme;
 using orderSorter.Businesslogic.Business;
@@ -37,14 +38,15 @@ namespace orderSorter
         public List<Timeslot> Timeslots => _timeslots;
 
 
-        public void AssignOrdersToKitchenTimeSlots(List<IOrder> orders, List<Timeslot> timeSlots)
+        public void AssignOrdersToKitchenTimeSlots( List<IOrder> orders,int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax)
         {
             OrderAssigner orderAssigner = new OrderAssigner();
-            IAssignStrategy kitchen = new AssignKitchenLimitStrategy();
+            IAssignStrategy kitchen = new AssignKitchenLimitStrategy(intervalInMinutes,numberOfHours,startTimeSlots,timeSlotMax);
             
             orderAssigner.SetStrategy(kitchen);
-            orderAssigner.AssignOrders(orders,timeSlots);
-            kitchen.GetCancelledOrders();
+            orderAssigner.AssignOrders(orders);
+        
+            
             
         }
 

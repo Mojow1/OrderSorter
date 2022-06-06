@@ -9,17 +9,24 @@ namespace orderSorter.Businesslogic.Fleet
         private double _maxCapacity;
         private double _reservedCapacity;
         private bool _availability;
+        public bool _permanentOutOfOrder;
 
-        public Car(int id, double maxCapacity, double reservedCapacity, bool availability)
+        public Car(int id, double maxCapacity, double reservedCapacity, bool availability, bool permanentOutOfOrder)
         {
             _id = id;
             _maxCapacity = maxCapacity;
             _reservedCapacity = reservedCapacity;
             _availability = availability;
+            _permanentOutOfOrder = permanentOutOfOrder;
         }
 
 
-        public int Id => _id;
+        public int Id
+        {
+            get => _id;
+            set => _id = value;
+        }
+
         public double MaxCapacity => _maxCapacity;
         public double ReservedCapacity
         {
@@ -28,8 +35,12 @@ namespace orderSorter.Businesslogic.Fleet
         }
 
         public bool Availability => _availability;
-        
-        
-        
+       
+
+        public bool PermanentOutOfOrder
+        {
+            get { return _permanentOutOfOrder; }
+            set => _permanentOutOfOrder = value;
+        }
     }
 }

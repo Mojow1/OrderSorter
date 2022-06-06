@@ -6,11 +6,11 @@ namespace orderSorter.Businesslogic.Interfaces
 {
     public interface IAssignStrategy
     {
-        public void AssignOrders(List<IOrder> orders, List<Timeslot> timeslots);
+        public void AssignOrders(List<IOrder> orders);
 
-        public List<Timeslot> GetTimeSlots();
+        //public List<Timeslot> GetTimeSlots();
 
-        public List<IOrder> GetCancelledOrders();
+        //public List<IOrder> GetCancelledOrders();
         public void CleanOrders(); // makes the Orderlist & the cancelledorderslist in the strategykitchen class emty
 
 

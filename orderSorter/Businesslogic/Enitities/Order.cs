@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualBasic;
 using orderSorter.Businesslogic.Business;
 using orderSorter.Businesslogic.Interfaces;
@@ -23,6 +24,7 @@ namespace orderSorter
             _allowedEndTime = allowedEndTime;
             _priority = priority;
             _products = products;
+            _orderWeight = products.Sum(x => x.Weight);
         }
 
 
@@ -37,7 +39,7 @@ namespace orderSorter
             _priority = priority;
             _products = products;
             _orderAccepted = false;
-            _orderWeight = CalculateOrderWeight(products);
+            _orderWeight = products.Sum(x => x.Weight);
         }
 
 
@@ -73,20 +75,6 @@ namespace orderSorter
             get => _orderAccepted;
             set => _orderAccepted = value;
         }
-
-        
-          public int CalculateOrderWeight(List<IProduct> products) // Method to calculate the orderweight
-          {
-              int orderWeight = 0;
-
-              for (int i = 0; i < products.Count; i++)
-              {
-                  orderWeight = orderWeight + products[i].Weight;
-
-              }
-              return orderWeight;
-          }
-        
         
         
     }
