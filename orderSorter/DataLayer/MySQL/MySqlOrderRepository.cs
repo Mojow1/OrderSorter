@@ -17,7 +17,7 @@ namespace orderSorter.DataLayer.MySQL
                 OpenConnection();
                 string query = "";
                 MySqlCommand cmd = new MySqlCommand(query, Connection);
-                cmd.ExecuteNonQuery(); // Nog uitzoeken wat deze precies doet
+                cmd.ExecuteNonQuery(); 
                 CloseConnection();
             }
             catch (MySqlException e)

@@ -6,6 +6,7 @@ using Microsoft.VisualBasic;
 using orderSorter.Businesslogic.Algoritme;
 using orderSorter.Businesslogic.Algoritme.ListSorter;
 using orderSorter.Businesslogic.Business;
+using orderSorter.Businesslogic.Business.Staff;
 using orderSorter.Businesslogic.Fleet;
 using orderSorter.Businesslogic.Interfaces;
 using orderSorter.DatabaseMySQL;
@@ -14,42 +15,31 @@ namespace orderSorter
 {
     class Program
     {
-        // Eventueel pakbon en/of rit toevoegen aan Delivery map
         // sorteren op tijd en op grootte en wellicht rekening houden met volume
         static void Main(string[] args)
         {
-            List<IOrder> orders = GetOrders();
+            List<IProduct> products = new List<IProduct>();
+            Stock stock = new Stock(products);
 
-            //List<Order> ord = orders.Cast<Order>().ToList();
+            List<IEmployee> employees = new List<IEmployee>();
+            Staff staff = new Staff(employees);
 
-            //var or = ord.Cast<IOrder>().ToList();
-            
-            
-            
+            List<IVehicle> vehicles = new List<IVehicle>();
+            Fleet fleet = new Fleet(vehicles);
+
+            Business business = new Business(stock,fleet,staff,GetOrders());
+
+   
 
 
 
 
 
-            //IListSorter sortedByDate = new SortsByDate();
-            //List<IOrder> sorted =  sortedByDate.SortList(orders);
 
-            IListSorter sortedBySize = new SortsBySize();
-            List<IOrder> sorted = sortedBySize.SortList(orders);
 
-            for (int i = 0; i < sorted.Count; i++)
-            {
-                Console.WriteLine("Id: " +sorted[i].Id + "   date:"+ sorted[i].OrderDate + "   price:" + sorted[i].OrderWeight);
-            }
 
-            List<Timeslot> timeSlots = GetTimeSlots();
-            
-           
-            
-  
-          
-            
-            
+
+
         }
         
         public static List<IOrder> GetOrders()

@@ -16,15 +16,14 @@ namespace orderSorter
         private Fleet _fleet;
         private Staff _staff;
         private List<IOrder> _orders;
-        private List<Timeslot> _timeslots;
 
-        public Business(Stock stock, Fleet fleet, Staff staff, List<IOrder> orders, List<Timeslot> timeslots)
+        public Business(Stock stock, Fleet fleet, Staff staff, List<IOrder> orders)
         {
             _stock = stock;
             _fleet = fleet;
            _staff = staff;
             _orders = orders;
-            _timeslots = timeslots;
+         
         }
 
         public Stock Stock => _stock;
@@ -34,8 +33,7 @@ namespace orderSorter
         public Staff Staff => _staff;
 
         public List<IOrder> Orders => _orders;
-
-        public List<Timeslot> Timeslots => _timeslots;
+        
 
 
         public void AssignOrdersToKitchenTimeSlots( List<IOrder> orders,int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax)
