@@ -9,15 +9,32 @@ using orderSorter.Businesslogic.Business;
 using orderSorter.Businesslogic.Business.Staff;
 using orderSorter.Businesslogic.Fleet;
 using orderSorter.Businesslogic.Interfaces;
-using orderSorter.DatabaseMySQL;
+
 
 namespace orderSorter
 {
-    class Program
-    {
-        // sorteren op tijd en op grootte en wellicht rekening houden met volume
-        static void Main(string[] args)
+   public class ConsoleGUI
+   {
+
+       private Business _business;
+
+
+       public ConsoleGUI(Business business)
+       {
+           _business = business;
+       }
+
+       // sorteren op tijd en op grootte en wellicht rekening houden met volume
+        public void Main()
         {
+            Console.WriteLine("START");
+            //Strategie 1 starten 
+            _business.OrderAssigner.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
+            _business.OrderAssigner.AssignOrders(_business.Orders);
+            
+            // Strategie 2 komt hier 
+            
+                //Tijdelijk, data komt uiteindelijk vanuit database
             List<IProduct> products = new List<IProduct>();
             Stock stock = new Stock(products);
 
@@ -27,7 +44,7 @@ namespace orderSorter
             List<IVehicle> vehicles = new List<IVehicle>();
             Fleet fleet = new Fleet(vehicles);
 
-            Business business = new Business(stock,fleet,staff,GetOrders());
+           
 
    
 
