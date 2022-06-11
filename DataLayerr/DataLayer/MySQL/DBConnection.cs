@@ -25,7 +25,7 @@ namespace orderSorter.DatabaseMySQL
         }
 
         // Intiialize values
-        private void Initialize()
+        public void Initialize()
         {
             _server = "localhost";
             _database = "ordersorter";
@@ -34,7 +34,7 @@ namespace orderSorter.DatabaseMySQL
             string connectionString;
 
             connectionString = "SERVER=" + _server + ";" + "DATABASE=" +  _database + ";" + "UID=" + _uid + ";" 
-                               + "PASSWORD=" + _password + ";";
+                               + "PASSWORD=" + _password + ";" ;
 
             _connection = new MySqlConnection(connectionString);
         }

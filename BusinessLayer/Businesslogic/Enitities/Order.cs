@@ -5,6 +5,7 @@ using Microsoft.VisualBasic;
 using orderSorter.Businesslogic.Business;
 using orderSorter.Businesslogic.Interfaces;
 
+// https://circle.visual-paradigm.com/simple-order-system/
 namespace orderSorter
 {
     public class Order : IOrder
@@ -28,7 +29,6 @@ namespace orderSorter
         }
 
 
-    
 
         // Constructor voor het toekennen van een id
         public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, List<IProduct> products)
@@ -40,6 +40,16 @@ namespace orderSorter
             _products = products;
             _orderAccepted = false;
             _orderWeight = products.Sum(x => x.Weight);
+        }
+        
+        public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, int orderWeight)
+        {
+            _id = id;
+            _orderDate = orderDate;
+            _allowedEndTime = allowedEndTime;
+            _priority = priority;
+            _orderAccepted = false;
+            _orderWeight = orderWeight;
         }
 
 

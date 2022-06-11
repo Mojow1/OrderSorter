@@ -18,12 +18,12 @@ namespace orderSorter
         private Staff _staff;
         private List<IOrder> _orders;
         private OrderAssigner _orderAssigner;
-        private IDataProviderIOrder _dataProviderIOrder;
-        public Business( IDataProviderIOrder dataProviderIOrder)
+        private IDataProviderOrder _dataProviderOrder;
+        public Business( IDataProviderOrder dataProviderOrder)
         {
            
-           _dataProviderIOrder = dataProviderIOrder;
-           //_orders = _dataProviderIOrder.FetchAllIOrders();
+           _dataProviderOrder = dataProviderOrder;
+           //_orders = _dataProviderOrder.FetchAllOrders();
             _orderAssigner = new OrderAssigner();
 
         }
@@ -32,7 +32,7 @@ namespace orderSorter
 
         public OrderAssigner OrderAssigner => _orderAssigner;
 
-        public IDataProviderIOrder DataProviderIOrder => _dataProviderIOrder;
+        public IDataProviderOrder DataProviderOrder => _dataProviderOrder;
 
         public Fleet Fleet => _fleet;
 

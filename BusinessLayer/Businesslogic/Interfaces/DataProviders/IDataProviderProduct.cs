@@ -5,11 +5,11 @@ using orderSorter.Businesslogic.Interfaces;
 
 namespace orderSorter.DataProviders
 {
-    public interface IDataProviderIProduct
+    public interface IDataProviderProduct
     {
 
-        public void AddIProduct(IProduct product);
-        public IProduct FetchIProduct();
+        public void AddProduct(IProduct product);
+        public IProduct FetchProduct(int id);
         public List<IProduct> FetchAllProducts();
     }
 }

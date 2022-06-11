@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.VisualBasic;
 using orderSorter.Businesslogic.Algoritme;
 using orderSorter.Businesslogic.Algoritme.ListSorter;
@@ -17,6 +19,7 @@ namespace orderSorter
    {
 
        private Business _business;
+       
 
 
        public ConsoleGUI(Business business)
@@ -28,6 +31,13 @@ namespace orderSorter
         public void Main()
         {
             Console.WriteLine("START");
+
+            
+            
+            
+            
+            
+            
             //Strategie 1 starten 
             _business.OrderAssigner.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
             _business.OrderAssigner.AssignOrders(_business.Orders);
@@ -35,6 +45,18 @@ namespace orderSorter
             // Strategie 2 komt hier 
             
                 //Tijdelijk, data komt uiteindelijk vanuit database
+                
+
+            
+                List<IOrder> dataOrders = _business.DataProviderOrder.FetchAllOrders();
+                    Console.WriteLine("start lijst");
+                foreach (var VARIABLE in dataOrders)
+                {
+                
+                    Console.WriteLine(VARIABLE.Id);
+                }
+                Console.WriteLine("eind lijst");
+                
             List<IProduct> products = new List<IProduct>();
             Stock stock = new Stock(products);
 
@@ -63,9 +85,9 @@ namespace orderSorter
         {
     
 
-            Product p1 = new Product(1, "product1", 10);
-            Product p2 = new Product(2, "product2", 20);
-            Product p3 = new Product(3, "product3", 30);
+            Product p1 = new Product(1, "product1", 10, true);
+            Product p2 = new Product(2, "product2", 20, true);
+            Product p3 = new Product(3, "product3", 30, true);
 
 
             List<IProduct> products = new List<IProduct>();

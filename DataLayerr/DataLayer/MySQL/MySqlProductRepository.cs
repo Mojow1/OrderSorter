@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using MySql.Data.MySqlClient;
 using orderSorter.Businesslogic.Business;
 using orderSorter.Businesslogic.Interfaces;
@@ -8,17 +9,27 @@ using orderSorter.DataProviders;
 
 namespace orderSorter.DataLayer.MySQL
 {
-    public class MySqlProductRepository : DBConnection, IDataProviderIProduct
+    public class MySqlProductRepository : DBConnection, IDataProviderProduct
     {
-        public void AddIProduct(IProduct product)
+        public void AddProduct(IProduct product)
         {
+          
+            //int inStock = (product.InStock ) ? 1 : 0;
             try
             {
-                OpenConnection();
-                string query = "";
-                MySqlCommand cmd = new MySqlCommand(query, Connection);
-                cmd.ExecuteNonQuery(); // Nog uitzoeken wat deze precies doet
-                CloseConnection();
+                if (OpenConnection())
+                {
+                    string query = $"INSERT INTO products(id, name, weight, instock) VALUES (\"{product.Id}\",\"{product.Name}\", \"{product.Weight}\" , \"{  Convert.ToInt32(product.InStock)}\" )";
+                    MySqlCommand cmd = new MySqlCommand(query, Connection);
+                    
+                    // Execute Command
+                    cmd.ExecuteNonQuery(); 
+                    
+                    // Close connection
+                    CloseConnection();
+                }
+       
+             
             }
             catch (MySqlException e)
             {
@@ -26,25 +37,36 @@ namespace orderSorter.DataLayer.MySQL
                 throw;
             }
         }
+        public IProduct FetchProduct(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-        public IProduct FetchIProduct() // nog parameter en query toevoegen
+
+        // Nog fixen om met behulp van een id op te halen
+        
+        /*
+        public IProduct FetchProduct(int id)
         {
             try
             {
-                OpenConnection();
-                string query = "Nog test";
-                MySqlCommand cmd = new MySqlCommand(query, Connection);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (OpenConnection())
                 {
-                    int id = reader.GetInt32("id");
-                    string name = reader.GetString("name");
-                    int weight = reader.GetInt32("weight");
-                    IProduct product = new Product(id, name, weight);
-                    return product;
+                    string query = "SELECT FROM products WHERE id=@id";
+                    MySqlCommand cmd = new MySqlCommand(query, Connection);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string name = reader.GetString("name");
+                        int weight = reader.GetInt32("weight");
+                        int inStock = reader.GetInt32("instock");
+                        IProduct product = new Product(id, name, weight, Convert.ToBoolean(inStock));
+                        return product;
+                    }
+                    reader.Close();
                 }
-                reader.Close();
             }
+            
             catch (MySqlException e)
             {
                 Console.WriteLine(e);
@@ -53,28 +75,44 @@ namespace orderSorter.DataLayer.MySQL
             CloseConnection();
             return null;
         }
-
+        */
+        
+        
+        
+        // int weight wordt niet omgezet in een boolean
         public List<IProduct> FetchAllProducts()
         {
             try
             {
                 List<IProduct> products = new List<IProduct>();
-                OpenConnection();
-                string query = "nog bepalen";
-                MySqlCommand cmd = new MySqlCommand(query, Connection);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (OpenConnection())
                 {
-                    int id = reader.GetInt32("id");
-                    string name = reader.GetString("name");
-                    int weight = reader.GetInt32("weight");
-                    IProduct product = new Product(id, name, weight);
-                    products.Add(product);
+                    string query = "SELECT * FROM products";
+                    MySqlCommand cmd = new MySqlCommand(query, Connection);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32("id");
+                        string name = reader.GetString("name");
+                        int weight = reader.GetInt32("weight");
+                        bool inStock = Convert.ToBoolean(reader.GetByte("instock"));
+                        IProduct product = new Product(id, name, weight, inStock);
+                        products.Add(product);
+                        
+                     
+                    }
+                    // Close Data Reader
+                    reader.Close();
+                    
+                    // Close Connection
+                    CloseConnection();
+                    
+                    // return products
                     return products;
+                    
                 }
-                reader.Close();
-            
-               
+                
+                
             }
             catch (MySqlException e)
             {
@@ -84,12 +122,6 @@ namespace orderSorter.DataLayer.MySQL
             CloseConnection();
             return null;
         }
-        
-        
-        
-        
-        
-        
         
     }
 }

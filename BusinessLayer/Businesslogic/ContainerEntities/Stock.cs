@@ -34,7 +34,7 @@ namespace orderSorter
         public void RemoveProduct(int id)
         {
             int index = _products.FindIndex(x => x.Id == id);
-            _products[index].OutOfOrder = true;
+            _products[index].InStock = true;
         }
 
 

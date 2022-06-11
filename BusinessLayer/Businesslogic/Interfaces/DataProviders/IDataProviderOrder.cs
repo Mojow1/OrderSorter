@@ -4,14 +4,14 @@ using orderSorter.Businesslogic.Interfaces;
 
 namespace orderSorter.DataProviders
 {
-    public interface IDataProviderIOrder
+    public interface IDataProviderOrder
     {
         
-        public void AddIOrder(IOrder order);
+        public void AddOrder(IOrder order);
 
-        public IOrder FetchIOrder();
+        public IOrder FetchOrder(int id);
 
-        public List<IOrder> FetchAllIOrders();
+        public List<IOrder> FetchAllOrders();
     }
 
 
