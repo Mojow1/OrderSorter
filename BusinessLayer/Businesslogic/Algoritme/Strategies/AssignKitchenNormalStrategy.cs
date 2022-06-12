@@ -77,7 +77,7 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
         }
 
         
-        public List<IOrder> GetCancelledOrders()
+        public List<IOrder> GetDeniedOrders()
         {
             return _cancelledOrders;
         }

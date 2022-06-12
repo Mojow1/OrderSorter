@@ -25,62 +25,30 @@ namespace orderSorter
        {
            _business = business;
        }
-
-       // sorteren op tijd en op grootte en wellicht rekening houden met volume
-        public void Main()
+       public void Main()
         {
             Console.WriteLine("START");
 
-            
-            
-            
-            
-            
-            
             //Strategie 1 starten 
             _business.OrderAssigner.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
             _business.OrderAssigner.AssignOrders(_business.Orders);
             
             // Strategie 2 komt hier 
             
-                //Tijdelijk, data komt uiteindelijk vanuit database
+             
                 
-
-            
-                List<IOrder> dataOrders = _business.DataProviderOrder.FetchAllOrders();
-                    Console.WriteLine("start lijst");
-                foreach (var VARIABLE in dataOrders)
-                {
+                _business.OrderAssigner.SetStrategy(new AssignKitchenNormalStrategy(10,8,new DateTime(),4));
+                _business.OrderAssigner.AssignOrders(_business.Orders);
                 
-                    Console.WriteLine(VARIABLE.Id);
-                }
-                Console.WriteLine("eind lijst");
                 
-            List<IProduct> products = new List<IProduct>();
-            Stock stock = new Stock(products);
-
-            List<IEmployee> employees = new List<IEmployee>();
-            Staff staff = new Staff(employees);
-
-            List<IVehicle> vehicles = new List<IVehicle>();
-            Fleet fleet = new Fleet(vehicles);
-
-           
-
    
 
-
-
-
-
-
-
-
+            
 
 
         }
         
-        public static List<IOrder> GetOrders()
+        public static List<IOrder> GetOrders() /// Tijdelijk, komt uiteindelijk vanuit database
         {
     
 
@@ -130,19 +98,7 @@ namespace orderSorter
             return orders;
         }
 
-        public static List<Timeslot> GetTimeSlots()
-        {
-            // timeslots
-            List<Timeslot> timeSlots = new List<Timeslot>();
-            DateTime time = new DateTime(2022, 5, 8, 16, 0, 0);
-            for (int i = 0; i < 8; i++)
-            {
-                timeSlots.Add(new Timeslot( 3,i+1 ,time, time.AddHours(1)));
-                time = time.AddHours(1);
-            }
-
-            return timeSlots;
-        }
+       
         
 
     }

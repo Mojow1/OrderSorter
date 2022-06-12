@@ -8,9 +8,9 @@ namespace orderSorter.Businesslogic.Interfaces
     {
         public void AssignOrders(List<IOrder> orders);
 
-        //public List<Timeslot> GetTimeSlots();
+        public List<Timeslot> GetTimeSlots();
 
-        //public List<IOrder> GetCancelledOrders();
+        public List<IOrder> GetDeniedOrders();
   
 
 

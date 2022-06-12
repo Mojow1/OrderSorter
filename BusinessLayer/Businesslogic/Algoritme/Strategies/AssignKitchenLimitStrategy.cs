@@ -82,7 +82,7 @@ namespace orderSorter.Businesslogic.Algoritme
         }
 
         
-        public List<IOrder> GetCancelledOrders()
+        public List<IOrder> GetDeniedOrders()
         {
             return _cancelledOrders;
         }
