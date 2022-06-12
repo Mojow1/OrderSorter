@@ -15,14 +15,15 @@ Start();
  void Start()
 {
  MySqlOrderRepository orderRepository = new MySqlOrderRepository();
- Business business =new Business(orderRepository);
+ MySqlProductRepository productRepository = new MySqlProductRepository();
+ Business business =new Business(orderRepository,productRepository);
  ConsoleGUI consoleGui = new ConsoleGUI(business);
  //consoleGui.Main();
 
  DBConnection connect = new DBConnection();
  IDataProviderProduct products = new MySqlProductRepository();
-
- /*IProduct prod = new Product(15, "product15", 68, false);
+ Database data = new Database();
+ IProduct prod = new Product(16, "product16", 200, false);
  
  products.AddProduct(prod);
  
@@ -35,11 +36,15 @@ Start();
  
   
  
- }*/
- 
- 
- 
- Console.WriteLine(products.FetchProduct(1));
+ }
+
+ /*IProduct product = products.FetchProduct(1);
+ IProduct product2 = products.FetchProduct(2);
+ IProduct product3 = products.FetchProduct(3);
+
+ Console.WriteLine(product.Id + "   "+  product.Name + "   "+ product.Weight+ "   "+ product.InStock);
+ Console.WriteLine(product2.Id + "   "+  product2.Name + "   "+ product2.Weight+ "   "+ product2.InStock);
+ Console.WriteLine(product3.Id + "   "+  product3.Name + "   "+ product3.Weight+ "   "+ product3.InStock);*/
 
 
 

@@ -11,7 +11,7 @@ namespace orderSorter.Businesslogic.Interfaces
         //public List<Timeslot> GetTimeSlots();
 
         //public List<IOrder> GetCancelledOrders();
-        public void CleanOrders(); // makes the Orderlist & the cancelledorderslist in the strategykitchen class emty
+  
 
 
     }

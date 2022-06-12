@@ -80,31 +80,41 @@ namespace orderSorter.DataLayer.MySQL
             try
             {
                 //List<IProduct> products = new List<IProduct>();
-
                 List<IOrder> orders = new List<IOrder>();
-                OpenConnection();
-                string query = "SELECT * FROM 'ordersorter'.'orders'";
-                MySqlCommand cmd = new MySqlCommand(query, Connection);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+
+                if (OpenConnection())
                 {
+                    string query = "SELECT * FROM 'ordersorter'.'orders'";
+                    MySqlCommand cmd = new MySqlCommand(query, Connection);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
               
                     
-                    int id = reader.GetInt32("id");
-                  //  DateTime orderDate = reader.GetDateTime("orderdate");
-                   // DateTime allowedEndTime = reader.GetDateTime("allowedendtime");
-                    bool priority = reader.GetBoolean("priority");
-                    bool orderAccepted = reader.GetBoolean("orderAccepted");
-                    int orderWeight = reader.GetInt32("orderweight");
-                    List<IProduct> products = new List<IProduct>(); // nog fixen ophalen lijst producten
+                        int id = reader.GetInt32("id");
+                        DateTime orderDate = reader.GetDateTime("orderdate");
+                        DateTime allowedEndTime = reader.GetDateTime("allowedendtime");
+                        bool priority = reader.GetBoolean("priority");
+                        bool orderAccepted = reader.GetBoolean("orderAccepted");
+                        int orderWeight = reader.GetInt32("orderweight");
+                        List<IProduct> products = new List<IProduct>(); // nog fixen ophalen lijst producten
 
-                    //IOrder order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted, orderWeight, products);
-                    //IOrder order = new Order(id);
-                   // orders.Add(order);
+                       // IOrder order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted, orderWeight, products);
+                        //IOrder order = new Order(id);
+                        // orders.Add(order);
+        
+                    }
+                    // Close Data Reader
+                    reader.Close();
+                    
+                    // Close Connection
+                    CloseConnection();
+                    
+                    // return Orders
                     return orders;
-                }
 
-                reader.Close();
+                }
+                
                
             }
             catch (MySqlException e)
@@ -115,5 +125,11 @@ namespace orderSorter.DataLayer.MySQL
             CloseConnection();
             return null;
         }
+
+
+
+
+
+
     }
 }

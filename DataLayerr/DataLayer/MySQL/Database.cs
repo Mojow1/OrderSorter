@@ -122,35 +122,36 @@ public class Database
     
     
      // Fetch order using the order id
-    public IOrder FetchOrder(int id)
-    {
-        try
-        {
-            if (OpenConnection())
-            {
-                string query = "SELECT FROM orders2 WHERE id=@i;";
-                
-                MySqlCommand cmd = new MySqlCommand(query, _connection);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    
-                    DateTime orderDate = reader.GetDateTime("orderdate");
-                    DateTime allowedEndTime = reader.GetDateTime("allowedendtime");
-                    int priority = reader.GetInt32("priority");
-                    bool orderAccepted = reader.GetBoolean("orderAccepted");
-                    int orderWeight = reader.GetInt32("orderweight");
-                    List<IProduct> products = new List<IProduct>(); // nog fixen ophalen lijst producten
-
-                    IOrder order = new Order(id, orderDate, allowedEndTime, Convert.ToBoolean(priority), orderAccepted, orderWeight, products);
-                    return order;
-
-                }
-                reader.Close();
-            }
-            
-            
-        }
+     public IProduct FetchProduct(int id)
+     {
+         try
+         {
+             if (OpenConnection())
+             {
+                 using (_connection)
+                 {
+                     using (MySqlCommand cmdd = new MySqlCommand())
+                     {
+                         cmdd.Connection = _connection;
+                         cmdd.CommandText = "SELECT * FROM products WHERE id=@id;";
+                         cmdd.Parameters.AddWithValue("@id", id);
+                         using (MySqlDataReader reader = cmdd.ExecuteReader())
+                         {
+                             while (reader.Read())
+                             {
+                                 string name = reader.GetString("name");
+                                 int weight = reader.GetInt32("weight");
+                                 int inStock = reader.GetInt32("instock");
+                                 IProduct product = new Product(id, name, weight, Convert.ToBoolean(inStock));
+                                 return product;
+                             }
+                             reader.Close();
+                         }
+                     }
+                 }
+             }
+         }
+         
         catch (MySqlException e)
         {
             Console.WriteLine(e);

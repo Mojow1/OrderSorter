@@ -37,36 +37,39 @@ namespace orderSorter.DataLayer.MySQL
                 throw;
             }
         }
-        public IProduct FetchProduct(int id)
-        {
-            throw new NotImplementedException();
-        }
+   
 
-
-        // Nog fixen om met behulp van een id op te halen
-        
-        /*
+        // https://www.code4example.com/csharp/how-to-pass-parameter-to-mysql-in-c/
         public IProduct FetchProduct(int id)
         {
             try
             {
                 if (OpenConnection())
                 {
-                    string query = "SELECT FROM products WHERE id=@id";
-                    MySqlCommand cmd = new MySqlCommand(query, Connection);
-                    MySqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using (Connection)
                     {
-                        string name = reader.GetString("name");
-                        int weight = reader.GetInt32("weight");
-                        int inStock = reader.GetInt32("instock");
-                        IProduct product = new Product(id, name, weight, Convert.ToBoolean(inStock));
-                        return product;
+                        using (MySqlCommand cmdd = new MySqlCommand())
+                        {
+                            cmdd.Connection = Connection;
+                            cmdd.CommandText = "SELECT * FROM products WHERE id=@id;";
+                            cmdd.Parameters.AddWithValue("@id", id);
+                            using (MySqlDataReader reader = cmdd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    string name = reader.GetString("name");
+                                    int weight = reader.GetInt32("weight");
+                                    int inStock = reader.GetInt32("instock");
+                                    IProduct product = new Product(id, name, weight, Convert.ToBoolean(inStock));
+                                    return product;
+                                }
+                                reader.Close();
+                            }
+                        }
                     }
-                    reader.Close();
                 }
             }
-            
+         
             catch (MySqlException e)
             {
                 Console.WriteLine(e);
@@ -75,11 +78,10 @@ namespace orderSorter.DataLayer.MySQL
             CloseConnection();
             return null;
         }
-        */
         
         
         
-        // int weight wordt niet omgezet in een boolean
+
         public List<IProduct> FetchAllProducts()
         {
             try
@@ -111,8 +113,6 @@ namespace orderSorter.DataLayer.MySQL
                     return products;
                     
                 }
-                
-                
             }
             catch (MySqlException e)
             {

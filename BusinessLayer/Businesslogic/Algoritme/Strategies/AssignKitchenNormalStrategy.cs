@@ -1,34 +1,29 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using Castle.Core.Internal;
-using Microsoft.VisualBasic;
 using orderSorter.Businesslogic.Business;
 using orderSorter.Businesslogic.Interfaces;
-using Org.BouncyCastle.Asn1.Esf;
-using Org.BouncyCastle.Bcpg;
 
-namespace orderSorter.Businesslogic.Algoritme
+namespace orderSorter.Businesslogic.Algoritme;
+
+public class AssignKitchenNormalStrategy : IAssignStrategy
 {
-    public class AssignKitchenLimitStrategy : IAssignStrategy
+    
+    private List<Timeslot> _timeSlots;
+    private List<IOrder> _cancelledOrders;
+
+    public AssignKitchenNormalStrategy(int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax)
     {
-        private List<Timeslot> _timeSlots;
-        private List<IOrder> _cancelledOrders;
-        
-        // constructor
-        public AssignKitchenLimitStrategy(int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax)
-        {
-            _timeSlots = GenerateTimeSlots(intervalInMinutes,numberOfHours, startTimeSlots, timeSlotMax);
-            _cancelledOrders = new List<IOrder>();
-        }
+        _timeSlots = GenerateTimeSlots(intervalInMinutes,numberOfHours, startTimeSlots, timeSlotMax);
+        _cancelledOrders = new List<IOrder>();
+    }
+
 
         
         public void AssignOrders(List<IOrder> orders)          // AssignOrders method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
         {
-            ClearsOrdersAndTimeSlots();
-            orders.OrderBy(x => x.OrderDate).ThenBy(x => x.OrderWeight).ToList(); // Sorts orders and makes the ones which have the higest orderWeight priority
-           
+            ClearOrdersAndTimeSlots();
+            orders.Sort((x, y) => x.OrderDate.CompareTo(y.OrderDate)); // sorts order by date/time.
+            
             for (int i = 0; i < orders.Count; i++)
             {
                 Assign(orders[i]);   //  loopt alle orders door
@@ -92,32 +87,25 @@ namespace orderSorter.Businesslogic.Algoritme
             return _timeSlots;
         }
 
-        private void ClearsOrdersAndTimeSlots()
+       private void ClearOrdersAndTimeSlots()
         {
             _timeSlots.Clear();
             _cancelledOrders.Clear();
         }
+    
+    private List<Timeslot> GenerateTimeSlots(int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax ) //// genereer
+    {
+        int numberOfTimeSlots = (60 / intervalInMinutes) * numberOfHours;
+        List<Timeslot> timeSlots = new List<Timeslot>();
+        DateTime time = startTimeSlots;
 
-
-
-        private List<Timeslot> GenerateTimeSlots(int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax ) //// genereer
+        for (int i = 0; i <= numberOfTimeSlots; i++)
         {
-            int numberOfTimeSlots = (60 / intervalInMinutes) * numberOfHours;
-            List<Timeslot> timeSlots = new List<Timeslot>();
-            DateTime time = startTimeSlots;
+            timeSlots.Add(new(timeSlotMax, i, time, time.AddMinutes(intervalInMinutes * i)));
+            time = time.AddMinutes(intervalInMinutes * i);
 
-            for (int i = 0; i <= numberOfTimeSlots; i++)
-            {
-                timeSlots.Add(new(timeSlotMax, i, time, time.AddMinutes(intervalInMinutes * i)));
-                time = time.AddMinutes(intervalInMinutes * i);
-
-            }
-
-
-            return timeSlots;
         }
         
+        return timeSlots;
     }
-    
-    
 }
