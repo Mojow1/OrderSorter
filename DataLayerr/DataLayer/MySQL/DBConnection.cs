@@ -7,6 +7,9 @@ using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Crypto.Tls;
 
 // https://www.codeproject.com/Articles/43438/Connect-C-to-MySQL
+// https://dev.mysql.com/doc/connector-net/en/connector-net-connections-errors.html
+
+//https://dev.mysql.com/doc/connector-net/en/connector-net-tutorials-stored-procedures.html
 
 namespace orderSorter.DatabaseMySQL
 {
@@ -49,12 +52,23 @@ namespace orderSorter.DatabaseMySQL
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Cannot connect to server.  Contact administrator");
-                
+
+              
+                // hoort hierin een messagebox?
+
+
             }
 
             return false;
         }
+        
+        
+        
+        
+        
+        
+        
+        
         
         // Close Connection
         public  bool CloseConnection()

@@ -34,6 +34,12 @@ namespace orderSorter
 
         }
 
+        public void AssignOrders(IAssignStrategy strategy)
+        {
+            _orderAssigner.SetStrategy(strategy);
+            _orderAssigner.AssignOrders(_orders);
+        }
+
         public Stock Stock => _stock;
 
         public OrderAssigner OrderAssigner => _orderAssigner;

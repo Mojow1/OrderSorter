@@ -5,6 +5,7 @@ using orderSorter.Businesslogic.Interfaces;
 
 namespace OrderSorterUnitTest;
 
+[
 public class StockTests
 {
     [Test]
@@ -21,6 +22,29 @@ public class StockTests
         
         //ASSERT
         Assert.AreEqual(2,products.Count);
+    }
+
+    [Test]
+    public void Adding_Product_With_Right_Id()
+    {
+        // ARRANGE
+        List<IProduct> products = new List<IProduct>();
+        IProduct product = new Product(1, "naam", 10, true);
+        IProduct product2 = new Product(2, "naam2", 25, true);
+        products.Add(product);
+        products.Add(product2);
+        // ACT
+        
+        int id = products.Count + 1;
+        product.Id = id;
+        
+        IProduct product3 = new Product(id, "naam3", 25, true);
+        products.Add(product3);
+        
+        // ASSERT
+        
+        Assert.AreEqual(3,products.Find(x => x.Name == "naam3").Id);
+        
     }
 
 
@@ -40,8 +64,6 @@ public class StockTests
         // ACT AND ASSERT
         
         Assert.AreEqual(10,products.Count);
-        
-        
         
     }
    

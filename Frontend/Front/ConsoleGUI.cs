@@ -41,6 +41,8 @@ namespace orderSorter
                 _business.OrderAssigner.AssignOrders(_business.Orders);
                 
                 
+                _business.AssignOrders(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
+             
    
 
             
@@ -57,7 +59,7 @@ namespace orderSorter
             Product p3 = new Product(3, "product3", 30, true);
 
 
-            List<IProduct> products = new List<IProduct>();
+            List<Product> products = new List<Product>();
             products.Add(p1);
             products.Add(p2);
             products.Add(p3);
