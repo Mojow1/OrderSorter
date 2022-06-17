@@ -50,7 +50,7 @@ namespace orderSorter
 
         }
         
-        public static List<IOrder> GetOrders() /// Tijdelijk, komt uiteindelijk vanuit database
+        public static List<Order> GetOrders() /// Tijdelijk, komt uiteindelijk vanuit database
         {
     
 
@@ -67,12 +67,12 @@ namespace orderSorter
             products.Add(p3);
 
 
-            List<IProduct> products2 = new List<IProduct>();
+            List<Product> products2 = new List<Product>();
             products2.Add(p1);
             products2.Add(p2);
             products2.Add(p3);
             
-            List<IProduct> products3 = new List<IProduct>();
+            List<Product> products3 = new List<Product>();
             products3.Add(p1);
             products3.Add(p2);
             products3.Add(p2);
@@ -82,7 +82,7 @@ namespace orderSorter
 
 
                 // orders
-            List<IOrder> orders= new List<IOrder>();
+            List<Order> orders= new List<Order>();
           
             for (int i = 0; i <20; i++)
             {

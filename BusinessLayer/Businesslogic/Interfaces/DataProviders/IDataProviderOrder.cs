@@ -7,11 +7,11 @@ namespace orderSorter.DataProviders
     public interface IDataProviderOrder
     {
         
-        public void AddOrder(IOrder order);
+        public void AddOrder(Order order);
 
-        public IOrder FetchOrder(int id);
+        public Order FetchOrder(int id);
 
-        public List<IOrder> FetchAllOrders();
+        public List<Order> FetchAllOrders();
     }
 
 

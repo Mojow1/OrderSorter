@@ -9,7 +9,7 @@ namespace orderSorter.Businesslogic.Business.Staff
         public int Id { get; set; }
         public string Name { get;  }
         public string Function { get;  }
-        public bool Availability { get; set; }
+        public bool Employed { get; set; }
         public bool DriversLicenceA { get;  }
         public bool DriversLicenceB { get;  }
 

@@ -8,7 +8,9 @@ namespace orderSorter.Businesslogic.Interfaces
         public bool Availability { get;}
         
         public bool PermanentOutOfOrder { get; set; }
-        
+
+        public void Deliver();
+
 
     }
 }

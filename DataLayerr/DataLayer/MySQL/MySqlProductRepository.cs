@@ -11,7 +11,7 @@ namespace orderSorter.DataLayer.MySQL
 {
     public class MySqlProductRepository : DBConnection, IDataProviderProduct
     {
-        public void AddProduct(IProduct product)
+        public void AddProduct(Product product)
         {
           
             //int inStock = (product.InStock ) ? 1 : 0;
@@ -40,7 +40,7 @@ namespace orderSorter.DataLayer.MySQL
    
 
         // https://www.code4example.com/csharp/how-to-pass-parameter-to-mysql-in-c/
-        public IProduct FetchProduct(int id)
+        public Product FetchProduct(int id)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace orderSorter.DataLayer.MySQL
                                     string name = reader.GetString("name");
                                     int weight = reader.GetInt32("weight");
                                     int inStock = reader.GetInt32("instock");
-                                    IProduct product = new Product(id, name, weight, Convert.ToBoolean(inStock));
+                                    Product product = new Product(id, name, weight, Convert.ToBoolean(inStock));
                                     return product;
                                 }
                                 reader.Close();
@@ -82,11 +82,11 @@ namespace orderSorter.DataLayer.MySQL
         
         
 
-        public List<IProduct> FetchAllProducts()
+        public List<Product> FetchAllProducts()
         {
             try
             {
-                List<IProduct> products = new List<IProduct>();
+                List<Product> products = new List<Product>();
                 if (OpenConnection())
                 {
                     string query = "SELECT * FROM products";
@@ -98,7 +98,7 @@ namespace orderSorter.DataLayer.MySQL
                         string name = reader.GetString("name");
                         int weight = reader.GetInt32("weight");
                         bool inStock = Convert.ToBoolean(reader.GetByte("instock"));
-                        IProduct product = new Product(id, name, weight, inStock);
+                        Product product = new Product(id, name, weight, inStock);
                         products.Add(product);
                         
                      

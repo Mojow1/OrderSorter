@@ -4,7 +4,7 @@ using orderSorter.Businesslogic.Interfaces;
 
 namespace orderSorter
 {
-    public class Product : IProduct
+    public class Product 
     {
      
         private int _id;
@@ -13,10 +13,11 @@ namespace orderSorter
         private bool _inStock;
 
 
-        public Product(string name, int weight)
+        public Product(string name, int weight, bool inStock)
         {
             _name = name;
             _weight = weight;
+            _inStock = inStock;
         }
 
 

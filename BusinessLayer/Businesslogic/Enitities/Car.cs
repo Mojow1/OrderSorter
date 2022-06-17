@@ -21,6 +21,12 @@ namespace orderSorter.Businesslogic.Fleet
         }
 
 
+        public Car(int id, IVehicle vechicle)
+        {
+            
+        }
+
+
         public int Id
         {
             get => _id;
@@ -41,6 +47,11 @@ namespace orderSorter.Businesslogic.Fleet
         {
             get { return _permanentOutOfOrder; }
             set => _permanentOutOfOrder = value;
+        }
+
+        public void Deliver()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

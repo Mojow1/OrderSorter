@@ -8,7 +8,7 @@ using orderSorter.Businesslogic.Interfaces;
 // https://circle.visual-paradigm.com/simple-order-system/
 namespace orderSorter
 {
-    public class Order : IOrder
+    public class Order 
     {
         private int _id;
         private DateTime _orderDate;
@@ -16,10 +16,10 @@ namespace orderSorter
         private bool _priority;
         private bool _orderAccepted; 
         private int _orderWeight;
-        private List<IProduct> _products;
+        private List<Product> _products;
         
         // constructor voor het aanmaken van een nieuwe order
-        public Order(DateTime orderDate, DateTime allowedEndTime, bool priority, List<IProduct> products)
+        public Order(DateTime orderDate, DateTime allowedEndTime, bool priority, List<Product> products)
         {
             _orderDate = orderDate;
             _allowedEndTime = allowedEndTime;
@@ -31,7 +31,7 @@ namespace orderSorter
 
 
         // Constructor voor het toekennen van een id
-        public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, List<IProduct> products)
+        public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, List<Product> products)
         {
             _id = id;
             _orderDate = orderDate;
@@ -55,7 +55,7 @@ namespace orderSorter
 
         // Constructor inclusief boolean orderaccepted
         public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, bool orderAccepted, 
-            int orderWeight, List<IProduct> products)
+            int orderWeight, List<Product> products)
         {
             _id = id;
             _orderDate = orderDate;
@@ -78,7 +78,7 @@ namespace orderSorter
 
         public int OrderWeight => _orderWeight;
 
-        public List<IProduct> Products => _products;
+        public List<Product> Products => _products;
 
         public bool OrderAccepted
         {

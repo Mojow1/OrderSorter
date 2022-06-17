@@ -1,32 +1,39 @@
 namespace orderSorter.Businesslogic.Business.Staff
 {
-    public class Deliverer : IEmployee
+    public class Deliverer
     {
-        public int Id { get; set; }
-        public string Name { get; }
-        public string Function { get;  }
-        public bool Availability { get; set; }
-        public bool DriversLicenceA { get;  }
-        public bool DriversLicenceB { get;  }
+        public int _id;
+        public string _name;
+        public bool _employed;
+        public bool _licenceA;
+        public bool _licenceB;
+        
 
-
-        public Deliverer(string name, string function, bool availability, bool driversLicenceA, bool driversLicenceB)
+        public Deliverer(string name, bool employed, bool licenceA, bool licenceB)
         {
-            Name = name;
-            Function = function;
-            Availability = availability;
-            DriversLicenceA = driversLicenceA;
-            DriversLicenceB = driversLicenceB;
+            _name = name;
+            _employed = employed;
+            _licenceA = licenceA;
+            _licenceB = licenceB;
+        }
+        
+        public Deliverer(int id, string name, bool employed, bool licenceA, bool licenceB)
+        {
+            _id = id;
+            _name = name;
+            _employed = employed;
+            _licenceA = licenceA;
+            _licenceB = licenceB;
         }
 
-        public Deliverer(int id, string name, string function, bool availability, bool driversLicenceA, bool driversLicenceB)
-        {
-            Id = id;
-            Name = name;
-            Function = function;
-            Availability = availability;
-            DriversLicenceA = driversLicenceA;
-            DriversLicenceB = driversLicenceB;
-        }
+        public int Id => _id;
+
+        public string Name => _name;
+
+        public bool Employed => _employed;
+
+        public bool LicenceA => _licenceA;
+
+        public bool LicenceB => _licenceB;
     }
 }

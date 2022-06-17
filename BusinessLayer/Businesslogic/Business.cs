@@ -16,7 +16,7 @@ namespace orderSorter
         private Stock _stock;
         private Fleet _fleet;
         private Staff _staff;
-        private List<IOrder> _orders;
+        private List<Order> _orders;
         private OrderAssigner _orderAssigner;
         
         private IDataProviderOrder _dataProviderOrder;
@@ -50,7 +50,7 @@ namespace orderSorter
 
         public Staff Staff => _staff;
 
-        public List<IOrder> Orders => _orders;
+        public List<Order> Orders => _orders;
         
 
 

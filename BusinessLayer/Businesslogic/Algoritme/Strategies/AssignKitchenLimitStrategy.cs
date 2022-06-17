@@ -14,17 +14,17 @@ namespace orderSorter.Businesslogic.Algoritme
     public class AssignKitchenLimitStrategy : IAssignStrategy
     {
         private List<Timeslot> _timeSlots;
-        private List<IOrder> _cancelledOrders;
+        private List<Order> _cancelledOrders;
         
         // constructor
         public AssignKitchenLimitStrategy(int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax)
         {
             _timeSlots = GenerateTimeSlots(intervalInMinutes,numberOfHours, startTimeSlots, timeSlotMax);
-            _cancelledOrders = new List<IOrder>();
+            _cancelledOrders = new List<Order>();
         }
 
         
-        public void AssignOrders(List<IOrder> orders)          // AssignOrders method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
+        public void AssignOrders(List<Order> orders)          // AssignOrders method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
         {
             ClearsOrdersAndTimeSlots();
             orders.OrderBy(x => x.OrderDate).ThenBy(x => x.OrderWeight).ToList(); // Sorts orders and makes the ones which have the higest orderWeight priority
@@ -35,7 +35,7 @@ namespace orderSorter.Businesslogic.Algoritme
             }
         }
         
-        public void Assign(IOrder order)
+        public void Assign(Order order)
       
         {
             for (int i = 0; i < _timeSlots.Count; i++)
@@ -59,7 +59,7 @@ namespace orderSorter.Businesslogic.Algoritme
         }
 
         
-        public bool CheckTime(IOrder order, Timeslot timeSlot)
+        public bool CheckTime(Order order, Timeslot timeSlot)
         {
             if (order.OrderDate.CompareTo(timeSlot.Start)>= 0 || timeSlot.Start.CompareTo(order.AllowedEndTime) <=0 ) 
             {
@@ -82,7 +82,7 @@ namespace orderSorter.Businesslogic.Algoritme
         }
 
         
-        public List<IOrder> GetDeniedOrders()
+        public List<Order> GetDeniedOrders()
         {
             return _cancelledOrders;
         }

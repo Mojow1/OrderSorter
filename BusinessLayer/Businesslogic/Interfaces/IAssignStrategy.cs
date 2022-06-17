@@ -6,11 +6,11 @@ namespace orderSorter.Businesslogic.Interfaces
 {
     public interface IAssignStrategy
     {
-        public void AssignOrders(List<IOrder> orders);
+        public void AssignOrders(List<Order> orders);
 
         public List<Timeslot> GetTimeSlots();
 
-        public List<IOrder> GetDeniedOrders();
+        public List<Order> GetDeniedOrders();
   
 
 

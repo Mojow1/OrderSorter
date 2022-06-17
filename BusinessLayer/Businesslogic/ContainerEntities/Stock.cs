@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using orderSorter.Businesslogic.Business;
 using orderSorter.Businesslogic.Interfaces;
 
@@ -6,35 +7,42 @@ namespace orderSorter
 {
     public class Stock
     {
-        private List<IProduct> _products;
+        private List<Product> _products;
 
-        public Stock(List<IProduct> products) // Constructor
+        public Stock(List<Product> products) // Constructor
         {
             _products = products;
         }
 
-        public void AddProduct(IProduct product)
+        public void AddProduct(Product product)
         {
             int id = _products.Count + 1;
-            product.Id = id;
-            _products.Add(product);
+            Product newProduct = new Product(id, product.Name, product.Weight, product.InStock);
+            _products.Add(newProduct);
         }
 
-        public IProduct FetchProduct(int id)
+        public Product FetchProduct(int id) // Fetch product by ID property
         {
-            int index = _products.FindIndex(x => x.Id == id);
-            return _products[index];
+        return _products.Find(x => x.Id == id);
+       
         }
 
-        public List<IProduct> FetchAllProducts()
+        public List<Product> FetchAllProducts()
         {
             return _products;
         }
 
-        public void RemoveProduct(int id)
+        public void RemoveProduct(int id) // Het product wordt niet volledig verwijderd krijgt een bool out of stock. Dit in verband met id nummering.
         {
-            int index = _products.FindIndex(x => x.Id == id);
-            _products[index].InStock = true;
+            Product productToRemove = _products.Find(x => x.Id == id);
+            if (productToRemove != null) // indien die dus bestaat.
+            {
+                Product productOutOfStock =
+                    new Product(productToRemove.Id, productToRemove.Name, productToRemove.Weight, false);
+            
+                int index = _products.FindIndex(x => x == productToRemove);
+                _products[index] = productOutOfStock;
+            }
         }
 
 

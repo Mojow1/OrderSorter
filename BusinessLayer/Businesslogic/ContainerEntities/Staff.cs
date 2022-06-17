@@ -6,36 +6,45 @@ namespace orderSorter.Businesslogic.Business.Staff
 {
     public class Staff
     {
-        private List<IEmployee> _employees;
+        private List<Deliverer> _deliverers;
 
-        public Staff(List<IEmployee> employees)
+        public Staff(List<Deliverer> deliverers) // Constructor
         {
-            _employees = employees;
+            _deliverers = deliverers;
         }
 
-        public void AddEmployee(IEmployee employee)
+        public void AddDeliverer(Deliverer deliverer)
         {
-            int id = _employees.Count + 1;
-            employee.Id = id;
-            _employees.Add(employee);
+            int id = _deliverers.Count + 1;
+            Deliverer newDeliverer = new Deliverer(id, deliverer.Name, deliverer.Employed,deliverer.LicenceA, deliverer.LicenceB);
+            _deliverers.Add(newDeliverer);
 
         }
-
-        public IEmployee FetchEmployee(int id)
+        
+        public Deliverer FetchDeliverer(int id) // Fetch deliverer by ID
         {
-            int index = _employees.FindIndex(x => x.Id == id);
-            return _employees[index];
+            return _deliverers.Find(x => x.Id == id);
         }
 
-        public List<IEmployee> FetchAllEmployees()
+        
+        public List<Deliverer> FetchAllDeliverers()
         {
-            return _employees;
+            return _deliverers;
         }
 
-        public void RemoveEmployee(int id)
+        
+        public void RemoveDeliverer(int id) // De bezorger wordt niet volledig verwijderd krijgt een employed. Dit in verband met id nummering.
         {
-            int index = _employees.FindIndex(x => x.Id == id);
-            _employees[index].Availability = false;
+            Deliverer delivererToRemove = _deliverers.Find(x => x.Id == id);
+
+            if (delivererToRemove != null) // Check expression for null
+            {
+                Deliverer notEmployed = new Deliverer(delivererToRemove.Id, delivererToRemove.Name, false,
+                    delivererToRemove.LicenceA, delivererToRemove.LicenceB);
+            
+                int index = _deliverers.FindIndex(x => x == delivererToRemove);
+                _deliverers[index] = notEmployed;
+            }
         }
     }
 }

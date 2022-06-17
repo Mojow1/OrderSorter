@@ -10,7 +10,7 @@ namespace orderSorter.Businesslogic.Business
         private int _timeslotTime;
         private DateTime _start;
         private DateTime _end;
-        private List<IOrder> _timeslotOrders; 
+        private List<Order> _timeslotOrders; 
 
 
 
@@ -20,7 +20,7 @@ namespace orderSorter.Businesslogic.Business
             _timeslotTime = timeslotTime;
             _start = start;
             _end = end;
-            _timeslotOrders = new List<IOrder>();
+            _timeslotOrders = new List<Order>();
         }
 
 
@@ -42,7 +42,7 @@ namespace orderSorter.Businesslogic.Business
             get => _end;
         }
 
-        public List<IOrder> TimeslotOrders
+        public List<Order> TimeslotOrders
         {
             get => _timeslotOrders;
             set => _timeslotOrders = value;

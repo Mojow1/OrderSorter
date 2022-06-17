@@ -9,17 +9,17 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
 {
     
     private List<Timeslot> _timeSlots;
-    private List<IOrder> _cancelledOrders;
+    private List<Order> _cancelledOrders;
 
     public AssignKitchenNormalStrategy(int intervalInMinutes, int numberOfHours, DateTime startTimeSlots, int timeSlotMax)
     {
         _timeSlots = GenerateTimeSlots(intervalInMinutes,numberOfHours, startTimeSlots, timeSlotMax);
-        _cancelledOrders = new List<IOrder>();
+        _cancelledOrders = new List<Order>();
     }
 
 
         
-        public void AssignOrders(List<IOrder> orders)          // AssignOrders method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
+        public void AssignOrders(List<Order> orders)          // AssignOrders method/execute method; geeft een lijst met tijdslots met daaraan toegewezen orders terug
         {
             ClearOrdersAndTimeSlots();
             orders.Sort((x, y) => x.OrderDate.CompareTo(y.OrderDate)); // sorts order by date/time.
@@ -30,7 +30,7 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
             }
         }
         
-        public void Assign(IOrder order)
+        public void Assign(Order order)
       
         {
             for (int i = 0; i < _timeSlots.Count; i++)
@@ -54,7 +54,7 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
         }
 
         
-        public bool CheckTime(IOrder order, Timeslot timeSlot)
+        public bool CheckTime(Order order, Timeslot timeSlot)
         {
             if (order.OrderDate.CompareTo(timeSlot.Start)>= 0 || timeSlot.Start.CompareTo(order.AllowedEndTime) <=0 ) 
             {
@@ -77,7 +77,7 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
         }
 
         
-        public List<IOrder> GetDeniedOrders()
+        public List<Order> GetDeniedOrders()
         {
             return _cancelledOrders;
         }

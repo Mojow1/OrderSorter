@@ -5,16 +5,16 @@ using orderSorter.Businesslogic.Interfaces;
 
 namespace OrderSorterUnitTest;
 
-[
-public class StockTests
+
+    public class StockTests
 {
     [Test]
     public void Adding_Product_Enlarges_Stock_List()
     {
         // ARRAANGE
-        List<IProduct> products = new List<IProduct>();
-        IProduct product = new Product(1, "naam", 10, true);
-        IProduct product2 = new Product(2, "naam2", 25, true);
+        List<Product> products = new List<Product>();
+        Product product = new Product(1, "naam", 10, true);
+        Product product2 = new Product(2, "naam2", 25, true);
 
         // ACT
         products.Add(product);
@@ -28,9 +28,9 @@ public class StockTests
     public void Adding_Product_With_Right_Id()
     {
         // ARRANGE
-        List<IProduct> products = new List<IProduct>();
-        IProduct product = new Product(1, "naam", 10, true);
-        IProduct product2 = new Product(2, "naam2", 25, true);
+        List<Product> products = new List<Product>();
+        Product product = new Product(1, "naam", 10, true);
+        Product product2 = new Product(2, "naam2", 25, true);
         products.Add(product);
         products.Add(product2);
         // ACT
@@ -38,7 +38,7 @@ public class StockTests
         int id = products.Count + 1;
         product.Id = id;
         
-        IProduct product3 = new Product(id, "naam3", 25, true);
+        Product product3 = new Product(id, "naam3", 25, true);
         products.Add(product3);
         
         // ASSERT
@@ -53,7 +53,7 @@ public class StockTests
     public void Calling_Product_List()
     {
         // ARRANGE
-        List<IProduct> products = new List<IProduct>();
+        List<Product> products = new List<Product>();
 
         for (int i = 0; i < 10; i++)
         {

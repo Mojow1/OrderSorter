@@ -15,7 +15,7 @@ namespace orderSorter.DataLayer.MySQL
             Initialize();
         }
 
-        public void AddOrder(IOrder order)
+        public void AddOrder(Order order)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace orderSorter.DataLayer.MySQL
 
 
 
-        public IOrder FetchOrder(int id)
+        public Order FetchOrder(int id)
         {
             try
             {
@@ -58,9 +58,9 @@ namespace orderSorter.DataLayer.MySQL
                     bool priority = reader.GetBoolean("priority");
                     bool orderAccepted = reader.GetBoolean("orderAccepted");
                     int orderWeight = reader.GetInt32("orderweight");
-                    List<IProduct> products = new List<IProduct>(); // nog fixen ophalen lijst producten
+                    List<Product> products = new List<Product>(); // nog fixen ophalen lijst producten
 
-                    IOrder order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted, orderWeight, products);
+                    Order order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted, orderWeight, products);
                     return order;
 
                 }
@@ -75,12 +75,12 @@ namespace orderSorter.DataLayer.MySQL
             return null;
         }
 
-        public List<IOrder> FetchAllOrders()
+        public List<Order> FetchAllOrders()
         {
             try
             {
                 //List<IProduct> products = new List<IProduct>();
-                List<IOrder> orders = new List<IOrder>();
+                List<Order> orders = new List<Order>();
 
                 if (OpenConnection())
                 {
@@ -97,7 +97,7 @@ namespace orderSorter.DataLayer.MySQL
                         bool priority = reader.GetBoolean("priority");
                         bool orderAccepted = reader.GetBoolean("orderAccepted");
                         int orderWeight = reader.GetInt32("orderweight");
-                        List<IProduct> products = new List<IProduct>(); // nog fixen ophalen lijst producten
+                        List<Product> products = new List<Product>(); // nog fixen ophalen lijst producten
 
                        // IOrder order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted, orderWeight, products);
                         //IOrder order = new Order(id);
