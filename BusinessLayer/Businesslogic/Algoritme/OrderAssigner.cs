@@ -23,8 +23,11 @@ namespace orderSorter.Businesslogic.Algoritme
            
         }
 
+        public IAssignStrategy AssignStrategy
+        {
+            get => _assignStrategy;
+        }
         
-     
         
     }
 }

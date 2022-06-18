@@ -13,11 +13,11 @@ Start();
 
  void Start()
 {
- MySqlOrderRepository orderRepository = new MySqlOrderRepository();
- MySqlProductRepository productRepository = new MySqlProductRepository();
- Business business =new Business(orderRepository,productRepository);
- ConsoleGUI consoleGui = new ConsoleGUI(business);
- consoleGui.Main();
+ //MySqlOrderRepository orderRepository = new MySqlOrderRepository();
+ //MySqlProductRepository productRepository = new MySqlProductRepository();
+ //Business business =new Business(orderRepository,productRepository);
+ //ConsoleGUI consoleGui = new ConsoleGUI(business);
+ //consoleGui.Main();
 
 
 

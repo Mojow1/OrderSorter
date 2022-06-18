@@ -21,9 +21,11 @@ namespace orderSorter
         
         private IDataProviderOrder _dataProviderOrder;
         private IDataProviderProduct _dataProviderProduct;
-        public Business( IDataProviderOrder dataProviderOrder, IDataProviderProduct dataProviderProduct)
+        
+        // optionele order assigner ten behoeve van testen??
+        public Business(  IDataProviderOrder dataProviderOrder, IDataProviderProduct dataProviderProduct)
         {
-            _orderAssigner = new OrderAssigner();
+            _orderAssigner =  new OrderAssigner();
             
             _dataProviderOrder = dataProviderOrder;
            _orders = _dataProviderOrder.FetchAllOrders();
@@ -34,11 +36,7 @@ namespace orderSorter
 
         }
 
-        public void AssignOrders(IAssignStrategy strategy)
-        {
-            _orderAssigner.SetStrategy(strategy);
-            _orderAssigner.AssignOrders(_orders);
-        }
+        
 
         public Stock Stock => _stock;
 

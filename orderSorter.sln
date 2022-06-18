@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{5D9ED202-8438-4D09-A812-877DF9C3D0F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderSorterUnitTest", "OrderSorterUnitTest\OrderSorterUnitTest.csproj", "{DAE01A13-305B-40C4-93F9-5F197097491B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderSorter.UnitTests", "OrderSorter.UnitTests\OrderSorter.UnitTests.csproj", "{DAE01A13-305B-40C4-93F9-5F197097491B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayerr", "DataLayerr\DataLayerr.csproj", "{8A2F758E-9529-4A09-BE8D-D96398E80A8D}"
 EndProject

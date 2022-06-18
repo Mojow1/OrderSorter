@@ -32,6 +32,9 @@ namespace orderSorter
             //Strategie 1 starten 
             _business.OrderAssigner.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
             _business.OrderAssigner.AssignOrders(_business.Orders);
+            _business.OrderAssigner.AssignStrategy.GetTimeSlots();
+            
+            
             
             // Strategie 2 komt hier 
             
@@ -41,7 +44,8 @@ namespace orderSorter
                 _business.OrderAssigner.AssignOrders(_business.Orders);
                 
                 
-                _business.AssignOrders(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
+                
+        
              
    
 
