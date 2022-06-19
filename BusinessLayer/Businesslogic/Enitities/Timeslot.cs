@@ -30,6 +30,7 @@ namespace orderSorter.Businesslogic.Business
             TimeSlotTime = timeSlotTime;
             Start = start;
             End = end;
+            TimeSlotOrders = new List<Order>();
         }
     }
 }

@@ -77,9 +77,9 @@ namespace orderSorter.DataLayer.MySQL
 
 
 
-                    Order order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted, orderWeight,
-                        products);
-                    return order;
+                    //Order order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted, orderWeight,
+                      //  products);
+                    //return order;
 
                 }
 
@@ -99,9 +99,7 @@ namespace orderSorter.DataLayer.MySQL
         {
             try
             {
-
                 List<Order> orders = new List<Order>();
-
                 if (OpenConnection())
                 {
                     string query = "SELECT * FROM orders";
@@ -116,11 +114,20 @@ namespace orderSorter.DataLayer.MySQL
                         DateTime allowedEndTime = reader.GetDateTime("allowedendtime");
                         bool priority = reader.GetBoolean("priority");
                         bool orderAccepted = reader.GetBoolean("orderAccepted");
-                        int orderWeight = reader.GetInt32("orderweight");
 
+                        Order order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted);
+                        //IOrder order = new Order(id);
+                        orders.Add(order);
+                        
+                        
 
+                    }
+
+                    List<Order> ordersComplete = new List<Order>();
+                    for (int i = 0; i < orders.Count; i++)
+                    {
                         List<Product> products = new List<Product>();
-                        string query1 = "SELECT * FROM products  WHERE OrderId=@id";
+                        string query1 = "SELECT * FROM products  WHERE OrderId=@orders[i]";
                         MySqlCommand cmd1 = new MySqlCommand(query1, Connection);
                         MySqlDataReader reader1 = cmd1.ExecuteReader();
                         while (reader1.Read())
@@ -134,14 +141,12 @@ namespace orderSorter.DataLayer.MySQL
 
 
                         }
-
-                        Order order = new Order(id, orderDate, allowedEndTime, priority, orderAccepted, orderWeight,
-                            products);
-                        //IOrder order = new Order(id);
-                        orders.Add(order);
-
+                        
+                        ordersComplete.Add(new(orders[i].Id,orders[i].OrderDate, orders[i].AllowedEndTime, orders[i].Priority, orders[i].OrderAccepted, products));
+                        
                     }
-
+                    
+                    
                     // Close Data Reader
                     reader.Close();
 
@@ -149,7 +154,7 @@ namespace orderSorter.DataLayer.MySQL
                     CloseConnection();
 
                     // return Orders
-                    return orders;
+                    return ordersComplete;
 
                 }
 

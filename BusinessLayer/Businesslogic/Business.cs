@@ -46,7 +46,9 @@ namespace orderSorter
       //  public OrderAssigner OrderAssigner => _orderAssigner;
 
         public IDataProviderOrder DataProviderOrder => _dataProviderOrder;
-        
+
+        public IDataProviderProduct DataProviderProduct => _dataProviderProduct;
+
         public List<Order> Orders => _orders;
         
         

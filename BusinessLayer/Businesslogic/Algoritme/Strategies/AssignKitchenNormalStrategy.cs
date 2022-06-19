@@ -97,15 +97,16 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
     {
         int numberOfTimeSlots = (60 / intervalInMinutes) * numberOfHours;
         List<Timeslot> timeSlots = new List<Timeslot>();
-        DateTime time = startTimeSlots;
+        DateTime start = startTimeSlots;
+        DateTime end = start.AddMinutes(intervalInMinutes);
 
-        for (int i = 0; i <= numberOfTimeSlots; i++)
+        for (int i = 1; i <= numberOfTimeSlots; i++)
         {
-            timeSlots.Add(new(timeSlotMax, i, time, time.AddMinutes(intervalInMinutes * i)));
-            time = time.AddMinutes(intervalInMinutes * i);
-
-        }
+            timeSlots.Add(new(timeSlotMax, i, start.AddMinutes(intervalInMinutes * i), end.AddMinutes(intervalInMinutes * i).AddMilliseconds(-1)));
         
+        }
+
+
         return timeSlots;
     }
 }

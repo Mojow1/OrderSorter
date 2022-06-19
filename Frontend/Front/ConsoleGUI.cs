@@ -30,10 +30,6 @@ namespace orderSorter
             Console.WriteLine("START");
 
             //Strategie 1 starten 
-            //_business.OrderAssigner.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
-            /*_business.OrderAssigner.AssignOrders(_business.Orders);
-            _business.OrderAssigner.AssignStrategy.GetTimeSlots();*/
-            
             _business.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
             _business.AssignOrders(_business.Orders);
             _business.AssignStrategy.GetTimeSlots();
@@ -43,11 +39,6 @@ namespace orderSorter
             
             // Strategie 2 komt hier 
             
-             
-                
-                /*_business.OrderAssigner.SetStrategy(new AssignKitchenNormalStrategy(10,8,new DateTime(),4));
-                _business.OrderAssigner.AssignOrders(_business.Orders);*/
-                
                 _business.SetStrategy(new AssignKitchenNormalStrategy(10,8,new DateTime(),4));
                 _business.AssignOrders(_business.Orders);
                 _business.AssignStrategy.GetTimeSlots();
@@ -101,11 +92,11 @@ namespace orderSorter
             {
                 DateTime ti = new DateTime(2022, 5, 8, 16, 0, 0);
                 ti = ti.AddMinutes(7 * i);
-                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products));
+                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, true, products));
                 ti = ti.AddMinutes(9 * i);
-                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products2));
+                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, true, products2));
                 ti = ti.AddMinutes(12 * i);
-                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products3));
+                orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, true, products3));
                 
                 
             }

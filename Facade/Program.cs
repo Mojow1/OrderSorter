@@ -3,6 +3,7 @@
 using System.Threading.Tasks.Dataflow;
 using ConsoleTables;
 using orderSorter;
+using orderSorter.Businesslogic.Algoritme;
 using orderSorter.Businesslogic.Interfaces;
 using orderSorter.DatabaseMySQL;
 using orderSorter.DataLayer.MySQL;
@@ -19,13 +20,15 @@ Start();
  //ConsoleGUI consoleGui = new ConsoleGUI(business);
  //consoleGui.Main();
 
- List<Order> orders = new List<Order>();
+ DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
+ AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(60, 8, date, 4);
+ int  numberOfTimeSlots = (60 / 60) * 8;
 
- orders = orderRepository.FetchAllOrders();
+ Console.WriteLine(kitchen.GetTimeSlots().Count);
+ Console.WriteLine(numberOfTimeSlots);
 
-
- for (int i = 0; i < orders.Count; i++)
+ for (int i = 0; i <kitchen.GetTimeSlots().Count; i++)
  {
-  Console.WriteLine(orders[i].Id);
+  Console.WriteLine(kitchen.GetTimeSlots()[i].Start+ "     "+ kitchen.GetTimeSlots()[i].End);
  }
 }

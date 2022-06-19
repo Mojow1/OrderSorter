@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Autofac.Extras.Moq;
+using Microsoft.EntityFrameworkCore.Storage;
 using NUnit.Framework;
 using orderSorter;
+using orderSorter.Businesslogic.Algoritme;
+using orderSorter.Businesslogic.Business;
 
 namespace OrderSorterUnitTest;
 
@@ -9,73 +13,107 @@ namespace OrderSorterUnitTest;
 public class AssignKitchenLimitStrategyTests
 {
 
+    [Test]
+    [TestCase(1)]
+    [TestCase(2)]
+    public void Checks_If_TimeSlot_Is_Full(int timeSlotMax )
+    {
+        // Arrange
+        DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
+        AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(40,8,date,4);
+        Timeslot timeSlot = new Timeslot(1, 1, date, date.AddHours(1));
+        timeSlot.TimeSlotOrders.Add(GetSampleOrders()[1]);
+        timeSlot.TimeSlotOrders.Add(GetSampleOrders()[2]);
+        
+        //Act
+        bool result = kitchen.CheckMax(timeSlot);
+
+        // Assert
+        Assert.AreEqual(false, result);
+        
+        
+
+    }
+
+    [Test]
+    public void Checks_Time(int orderId, DateTime time )
+    {
+        // Arrange
+        DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
+        AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(40,8,date,4);
 
 
-    List<Order> GetSampleOrders()
+       List<Product> products = new List<Product>();
+       products.Add(new Product(1, "naam", 5, true));
+       Order order = new Order(1, date.AddMinutes(20),date.AddHours(2) ,true, true, products);
+       Timeslot timeSlot = new Timeslot(1, 1, date, date.AddHours(1));
+
+       // Act
+       var result = kitchen.CheckTime(order, timeSlot);
+
+       // Assert
+       Assert.AreEqual(true, result);
+       
+    }
+    
+ 
+
+    [Test]
+    [TestCase(40,8,4)]
+    [TestCase(60,5,3)]
+    [TestCase(15,5,8)]
+    [TestCase(30,8,4)]
+    public void Generating_TimeSlots(int intervalInMinutes, int numberOfHours, int timeslotMax )
+    {
+        // Arrange
+
+        DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
+        AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(intervalInMinutes,numberOfHours,date,timeslotMax);
+        
+        int numberOfTimeSlots = (60 / intervalInMinutes) * numberOfHours;
+       
+        // Act
+        
+
+        // Assert
+        Assert.AreEqual(numberOfTimeSlots, kitchen.GetTimeSlots().Count);
+    }
+    
+    
+    
+    private List<Order> GetSampleOrders()
     {
         List<Order> output = new List<Order>();
         List<Product> products = new List<Product>();
+        List<Product> products2 = new List<Product>();
+        List<Product> products3 = new List<Product>();
 
 
         for (int i = 0; i < 5; i++)
         {
-            products.Add(new Product(i,$"product{i}", i, true));
+            products.Add(new Product(i,$"product{i}", i*3, true));
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            products2.Add(new Product(i,$"product{i}", i*5, true));
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            products.Add(new Product(i,$"product{i}", i*8, true));
         }
         
-        
-        
-        
-        Product p1 = new Product(1, "product1", 10, true);
-        Product p2 = new Product(2, "product2", 20, true);
-        Product p3 = new Product(3, "product3", 30, true);
-
-
-        
-        products.Add(p1);
-        products.Add(p2);
-        products.Add(p3);
-        products.Add(p3);
-        products.Add(p3);
-
-
-        List<Product> products2 = new List<Product>();
-        products2.Add(p1);
-        products2.Add(p2);
-        products2.Add(p3);
-            
-        List<Product> products3 = new List<Product>();
-        products3.Add(p1);
-        products3.Add(p2);
-        products3.Add(p2);
-        products3.Add(p2);
-            
-         
-
-
-        // orders
-        List<Order> orders= new List<Order>();
-          
-            
-        for (int i = 0; i <20; i++)
+        for (int i = 0; i <5; i++)
         {
             DateTime ti = new DateTime(2022, 5, 8, 16, 0, 0);
             ti = ti.AddMinutes(7 * i);
-            orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products));
+            output.Add(new Order(i+1, ti,ti.AddHours(2) , true, true, products));
             ti = ti.AddMinutes(9 * i);
-            orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products2));
+            output.Add(new Order(i+1, ti,ti.AddHours(2) , true, true, products2));
             ti = ti.AddMinutes(12 * i);
-            orders.Add(new Order(i+1, ti,ti.AddHours(2) , true, products3));
-                
-                
+            output.Add(new Order(i+1, ti,ti.AddHours(2) , true, true, products3));
+            
         }
-
-
-
-
-
-
-
-
         return output;
+
     }
 }

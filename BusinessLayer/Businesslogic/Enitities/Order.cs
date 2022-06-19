@@ -20,25 +20,30 @@ namespace orderSorter
         public List<Product> Products { get;  }
 
 
-        public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, bool orderAccepted, int orderWeight, List<Product> products)
+        public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, bool orderAccepted,  List<Product> products)
         {
             Id = id;
             OrderDate = orderDate;
             AllowedEndTime = allowedEndTime;
             Priority = priority;
             OrderAccepted = orderAccepted;
-            OrderWeight = orderWeight;
+            OrderWeight = CalculateOrderWeight(products);
             Products = products;
         }
 
-        public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, List<Product> products)
+    
+        
+        public Order(int id, DateTime orderDate, DateTime allowedEndTime, bool priority, bool orderAccepted) // ctr voor database tabel
         {
             Id = id;
             OrderDate = orderDate;
             AllowedEndTime = allowedEndTime;
             Priority = priority;
-            Products = products;
+            OrderAccepted = orderAccepted;
         }
+        
+        
+
 
         private int CalculateOrderWeight(List<Product> products)
         {
