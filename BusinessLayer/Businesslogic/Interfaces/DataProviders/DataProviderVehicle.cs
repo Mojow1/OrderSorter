@@ -6,6 +6,9 @@ namespace orderSorter.DataProviders
 {
     public interface DataProviderVehicle
     {
+        public void AddVehicle(IVehicle vehicle);
+
+        public IVehicle FetchVehicle();
         List<IVehicle> fetchAllVehicles();
     }
 }

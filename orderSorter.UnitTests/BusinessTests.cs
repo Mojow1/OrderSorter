@@ -18,6 +18,7 @@ public class BusinessTests
     {
         Mock<IDataProviderOrder> mockOrderRepository = new Mock<IDataProviderOrder>();
 
+
         Mock<IDataProviderProduct> mockProductRepository = new Mock<IDataProviderProduct>();
         Business business = new Business(mockOrderRepository.Object,mockProductRepository.Object);
         business.Orders.Should().NotBeNull();

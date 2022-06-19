@@ -13,15 +13,19 @@ Start();
 
  void Start()
 {
- //MySqlOrderRepository orderRepository = new MySqlOrderRepository();
+ MySqlOrderRepository orderRepository = new MySqlOrderRepository();
  //MySqlProductRepository productRepository = new MySqlProductRepository();
  //Business business =new Business(orderRepository,productRepository);
  //ConsoleGUI consoleGui = new ConsoleGUI(business);
  //consoleGui.Main();
 
+ List<Order> orders = new List<Order>();
+
+ orders = orderRepository.FetchAllOrders();
 
 
- 
- 
-
+ for (int i = 0; i < orders.Count; i++)
+ {
+  Console.WriteLine(orders[i].Id);
+ }
 }

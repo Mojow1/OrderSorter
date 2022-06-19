@@ -30,9 +30,14 @@ namespace orderSorter
             Console.WriteLine("START");
 
             //Strategie 1 starten 
-            _business.OrderAssigner.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
-            _business.OrderAssigner.AssignOrders(_business.Orders);
-            _business.OrderAssigner.AssignStrategy.GetTimeSlots();
+            //_business.OrderAssigner.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
+            /*_business.OrderAssigner.AssignOrders(_business.Orders);
+            _business.OrderAssigner.AssignStrategy.GetTimeSlots();*/
+            
+            _business.SetStrategy(new AssignKitchenLimitStrategy(10,8,new DateTime(),4));
+            _business.AssignOrders(_business.Orders);
+            _business.AssignStrategy.GetTimeSlots();
+            _business.AssignStrategy.GetDeniedOrders();
             
             
             
@@ -40,10 +45,13 @@ namespace orderSorter
             
              
                 
-                _business.OrderAssigner.SetStrategy(new AssignKitchenNormalStrategy(10,8,new DateTime(),4));
-                _business.OrderAssigner.AssignOrders(_business.Orders);
+                /*_business.OrderAssigner.SetStrategy(new AssignKitchenNormalStrategy(10,8,new DateTime(),4));
+                _business.OrderAssigner.AssignOrders(_business.Orders);*/
                 
-                
+                _business.SetStrategy(new AssignKitchenNormalStrategy(10,8,new DateTime(),4));
+                _business.AssignOrders(_business.Orders);
+                _business.AssignStrategy.GetTimeSlots();
+                _business.AssignStrategy.GetDeniedOrders();
                 
         
              
@@ -88,6 +96,7 @@ namespace orderSorter
                 // orders
             List<Order> orders= new List<Order>();
           
+            
             for (int i = 0; i <20; i++)
             {
                 DateTime ti = new DateTime(2022, 5, 8, 16, 0, 0);
@@ -100,6 +109,7 @@ namespace orderSorter
                 
                 
             }
+            
 
             return orders;
         }

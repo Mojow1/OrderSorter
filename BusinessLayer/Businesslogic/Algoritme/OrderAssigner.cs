@@ -1,12 +1,11 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using orderSorter.Businesslogic.Business;
 using orderSorter.Businesslogic.Interfaces;
 
 namespace orderSorter.Businesslogic.Algoritme
 {
-    // https://refactoring.guru/design-patterns/assignStrategy
-    // https://refactoring.guru/design-patterns/template-method/csharp/example
+
     public class OrderAssigner
     {
         private IAssignStrategy _assignStrategy;
@@ -30,4 +29,4 @@ namespace orderSorter.Businesslogic.Algoritme
         
         
     }
-}
+}*/

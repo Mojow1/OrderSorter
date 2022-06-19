@@ -78,18 +78,21 @@ namespace orderSorter.DataLayer.MySQL
             CloseConnection();
             return null;
         }
-        
-        
-        
 
         public List<Product> FetchAllProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public List<Product> FetchAllProducts(int orderId)
         {
             try
             {
                 List<Product> products = new List<Product>();
                 if (OpenConnection())
                 {
-                    string query = "SELECT * FROM products";
+                    string query = "SELECT * FROM products  WHERE OrderId=@orderId";
                     MySqlCommand cmd = new MySqlCommand(query, Connection);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())

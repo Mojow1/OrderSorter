@@ -2,38 +2,20 @@ namespace orderSorter.Businesslogic.Business.Staff
 {
     public class Deliverer
     {
-        public int _id;
-        public string _name;
-        public bool _employed;
-        public bool _licenceA;
-        public bool _licenceB;
-        
+        public int Id { get; set; }
+        public string Name { get;  }
+        public bool Employed { get; set; }
+        public bool DriversLicenceA { get;  }
+        public bool DriversLicenceB { get;  }
 
-        public Deliverer(string name, bool employed, bool licenceA, bool licenceB)
+
+        public Deliverer(int id, string name, bool employed, bool driversLicenceA, bool driversLicenceB)
         {
-            _name = name;
-            _employed = employed;
-            _licenceA = licenceA;
-            _licenceB = licenceB;
+            Id = id;
+            Name = name;
+            Employed = employed;
+            DriversLicenceA = driversLicenceA;
+            DriversLicenceB = driversLicenceB;
         }
-        
-        public Deliverer(int id, string name, bool employed, bool licenceA, bool licenceB)
-        {
-            _id = id;
-            _name = name;
-            _employed = employed;
-            _licenceA = licenceA;
-            _licenceB = licenceB;
-        }
-
-        public int Id => _id;
-
-        public string Name => _name;
-
-        public bool Employed => _employed;
-
-        public bool LicenceA => _licenceA;
-
-        public bool LicenceB => _licenceB;
     }
 }

@@ -52,22 +52,11 @@ namespace orderSorter.DatabaseMySQL
             }
             catch (MySqlException ex)
             {
-
-              
-                // hoort hierin een messagebox?
-
-
+                
             }
 
             return false;
         }
-        
-        
-        
-        
-        
-        
-        
         
         
         // Close Connection

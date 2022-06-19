@@ -42,7 +42,7 @@ namespace orderSorter.Businesslogic.Algoritme
             {
                 if (CheckTime(order, _timeSlots[i]) && CheckMax(_timeSlots[i]))
                 {
-                    _timeSlots[i].TimeslotOrders.Add(order);
+                    _timeSlots[i].TimeSlotOrders.Add(order);
                     Console.WriteLine("order :"+ order.Id +" added to timslot: " + i);
                    return;
 
@@ -74,7 +74,7 @@ namespace orderSorter.Businesslogic.Algoritme
         
         public bool CheckMax(Timeslot timeSlot) // Checkt of de timeslot het maximum aantal orders heeft bereikt.
         {
-            if (timeSlot.TimeslotMax > timeSlot.TimeslotOrders.Count)
+            if (timeSlot.TimesSlotMax > timeSlot.TimeSlotOrders.Count)
             {
                 return true;
             }

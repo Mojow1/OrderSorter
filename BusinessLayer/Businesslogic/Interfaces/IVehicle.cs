@@ -6,10 +6,9 @@ namespace orderSorter.Businesslogic.Interfaces
         public double MaxCapacity { get;}
         public double ReservedCapacity { get; }
         public bool Availability { get;}
-        
-        public bool PermanentOutOfOrder { get; set; }
+        public bool InUse { get; set; }
 
-        public void Deliver();
+ 
 
 
     }

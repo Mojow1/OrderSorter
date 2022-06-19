@@ -6,47 +6,30 @@ namespace orderSorter.Businesslogic.Business
 {
     public class Timeslot
     {
-        private int _timeslotMax;
-        private int _timeslotTime;
-        private DateTime _start;
-        private DateTime _end;
-        private List<Order> _timeslotOrders; 
 
 
+        public int TimesSlotMax { get;  }
+        public int TimeSlotTime { get; }
+        public DateTime Start { get; }
+        public DateTime End { get; }
+        public List<Order> TimeSlotOrders { get;  }
 
-        public Timeslot(int timeslotMax, int timeslotTime, DateTime start, DateTime end)
+
+        public Timeslot(int timesSlotMax, int timeSlotTime, DateTime start, DateTime end, List<Order> timeSlotOrders)
         {
-            _timeslotMax = timeslotMax;
-            _timeslotTime = timeslotTime;
-            _start = start;
-            _end = end;
-            _timeslotOrders = new List<Order>();
+            TimesSlotMax = timesSlotMax;
+            TimeSlotTime = timeSlotTime;
+            Start = start;
+            End = end;
+            TimeSlotOrders = timeSlotOrders;
         }
 
-
-        public int TimeslotMax
+        public Timeslot(int timesSlotMax, int timeSlotTime, DateTime start, DateTime end)
         {
-            get => _timeslotMax;
+            TimesSlotMax = timesSlotMax;
+            TimeSlotTime = timeSlotTime;
+            Start = start;
+            End = end;
         }
-
-        public int TimeslotTime => _timeslotTime;
-
-
-        public DateTime Start
-        {
-            get => _start;
-        }
-
-        public DateTime End
-        {
-            get => _end;
-        }
-
-        public List<Order> TimeslotOrders
-        {
-            get => _timeslotOrders;
-            set => _timeslotOrders = value;
-        }
-        
     }
 }

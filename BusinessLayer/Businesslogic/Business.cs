@@ -8,47 +8,64 @@ using orderSorter.Businesslogic.Interfaces;
 using orderSorter.DataProviders;
 using Org.BouncyCastle.Asn1.Cms;
 
+// https://refactoring.guru/design-patterns/assignStrategy
+// https://refactoring.guru/design-patterns/template-method/csharp/example
+
 namespace orderSorter
 {
     public class Business
     {
-        
-        private Stock _stock;
-        private Fleet _fleet;
-        private Staff _staff;
-        private List<Order> _orders;
-        private OrderAssigner _orderAssigner;
-        
         private IDataProviderOrder _dataProviderOrder;
         private IDataProviderProduct _dataProviderProduct;
+        
+        private IAssignStrategy _assignStrategy;
+
+        private List<Order> _orders;
+        //private OrderAssigner _orderAssigner;
+        
+  
         
         // optionele order assigner ten behoeve van testen??
         public Business(  IDataProviderOrder dataProviderOrder, IDataProviderProduct dataProviderProduct)
         {
-            _orderAssigner =  new OrderAssigner();
+            //_orderAssigner =  new OrderAssigner();
             
             _dataProviderOrder = dataProviderOrder;
            _orders = _dataProviderOrder.FetchAllOrders();
 
            _dataProviderProduct = dataProviderProduct;
-           _stock = new Stock(_dataProviderProduct.FetchAllProducts());
+       
           
 
         }
 
         
 
-        public Stock Stock => _stock;
 
-        public OrderAssigner OrderAssigner => _orderAssigner;
+
+      //  public OrderAssigner OrderAssigner => _orderAssigner;
 
         public IDataProviderOrder DataProviderOrder => _dataProviderOrder;
-
-        public Fleet Fleet => _fleet;
-
-        public Staff Staff => _staff;
-
+        
         public List<Order> Orders => _orders;
+        
+        
+        public void SetStrategy(IAssignStrategy assignStrategy)
+        {
+            _assignStrategy = assignStrategy;
+        }
+
+
+        public void  AssignOrders(List<Order> orders)
+        {
+            _assignStrategy.AssignOrders(orders);
+           
+        }
+
+        public IAssignStrategy AssignStrategy
+        {
+            get => _assignStrategy;
+        }
         
 
 

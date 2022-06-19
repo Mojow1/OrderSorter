@@ -6,48 +6,19 @@ namespace orderSorter
 {
     public class Product 
     {
-     
-        private int _id;
-        private string _name;
-        private int _weight;
-        private bool _inStock;
 
-
-        public Product(string name, int weight, bool inStock)
-        {
-            _name = name;
-            _weight = weight;
-            _inStock = inStock;
-        }
+        public int Id { get;  }
+        public string Name { get;  } 
+        public int Weight { get;  }
+        public bool InStock { get;  }
 
 
         public Product(int id, string name, int weight, bool inStock)
         {
-            _id = id;
-            _name = name;
-            _weight = weight;
-            _inStock = inStock;
+            Id = id;
+            Name = name;
+            Weight = weight;
+            InStock = inStock;
         }
-        
- 
-
-        
-        public int Id
-        {
-            get => _id;
-            set => _id = value;
-        }
-
-        public string Name => _name;
-        public int Weight => _weight;
-
-        public bool InStock
-        {
-            get => _inStock; 
-            set=> _inStock= value;
-        }
-        
-        
- 
     }
 }

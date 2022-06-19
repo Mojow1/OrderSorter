@@ -5,6 +5,6 @@ namespace orderSorter.DataProviders
 {
     public interface DataProviderDeliverer
     {
-        List<IEmployee> fetchAllDeliverers();
+        List<Deliverer> fetchAllDeliverers();
     }
 }
