@@ -1,12 +1,18 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=DAE01A13_002D305B_002D40C4_002D93F9_002D5F197097491B_002Fd_003AContainerEntities_002Ff_003AStaffTests_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\mskil\AppData\Local\JetBrains\Rider2021.3\resharper-host\temp\Rider\vAny\CoverageData\_orderSorter.1193629634\Snapshot\snapshot.utdcvr</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4027ef2b_002D1c47_002D4766_002D9724_002D36f4e26c64b6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Adding_Product_Enlarges_Stock_List" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.BusinessProductsTests.LoadProducts_ValidCall&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.BusinessProductsTests.AddProduct_ValidCall&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.AssignKitchenLimitStrategyTests.Assign_Order_To_TimeSlot&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.AssignKitchenLimitStrategyTests.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.BusinessProductsTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.AssignKitchenLimitStrategyTests.Checks_Time&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.BusinessProductsTests.LoadProducts_ValidCall&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.BusinessProductsTests.AddProduct_ValidCall&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.AssignKitchenLimitStrategyTests.Assign_Order_To_TimeSlot&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.AssignKitchenLimitStrategyTests.Test&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.BusinessProductsTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::DAE01A13-305B-40C4-93F9-5F197097491B::net6.0::OrderSorterUnitTest.AssignKitchenLimitStrategyTests.Checks_Time&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+    &lt;ProjectFile&gt;DAE01A13-305B-40C4-93F9-5F197097491B/d:Algoritme/f:AssignKitchenLimitStrategyTests.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;ProjectFile&gt;DAE01A13-305B-40C4-93F9-5F197097491B/d:Algoritme/f:AssignKitchenNormalStrategyTest.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;ProjectFile&gt;DAE01A13-305B-40C4-93F9-5F197097491B/f:BusinessOrderTests.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

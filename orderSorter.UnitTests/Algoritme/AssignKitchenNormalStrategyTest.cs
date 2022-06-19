@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Autofac.Extras.Moq;
-using Microsoft.EntityFrameworkCore.Storage;
 using NUnit.Framework;
 using orderSorter;
 using orderSorter.Businesslogic.Algoritme;
@@ -10,9 +8,8 @@ using orderSorter.Businesslogic.Business;
 namespace OrderSorterUnitTest;
 
 [TestFixture]
-public class AssignKitchenLimitStrategyTests
+public class AssignKitchenNormalStrategyTest
 {
-
     [Test]
     [TestCase(1)]
     [TestCase(2)]
@@ -20,7 +17,7 @@ public class AssignKitchenLimitStrategyTests
     {
         // Arrange
         DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
-        AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(40,8,date,4);
+        AssignKitchenNormalStrategy kitchen = new AssignKitchenNormalStrategy(40,8,date,4);
         Timeslot timeSlot = new Timeslot(1, 1, date, date.AddHours(1));
         timeSlot.TimeSlotOrders.Add(GetSampleOrders()[1]);
         timeSlot.TimeSlotOrders.Add(GetSampleOrders()[2]);
@@ -40,7 +37,7 @@ public class AssignKitchenLimitStrategyTests
     {
         // Arrange
         DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
-        AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(40,8,date,4);
+        AssignKitchenNormalStrategy kitchen = new AssignKitchenNormalStrategy(40,8,date,4);
 
 
        List<Product> products = new List<Product>();
@@ -68,7 +65,7 @@ public class AssignKitchenLimitStrategyTests
         // Arrange
 
         DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
-        AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(intervalInMinutes,numberOfHours,date,timeslotMax);
+        AssignKitchenNormalStrategy kitchen = new AssignKitchenNormalStrategy(intervalInMinutes,numberOfHours,date,timeslotMax);
         
         int numberOfTimeSlots = (60 / intervalInMinutes) * numberOfHours;
        
@@ -78,6 +75,7 @@ public class AssignKitchenLimitStrategyTests
         // Assert
         Assert.AreEqual(numberOfTimeSlots, kitchen.GetTimeSlots().Count);
     }
+    
     [Test]
     [TestCase(40,8,4)]
     [TestCase(60,5,3)]
@@ -88,7 +86,7 @@ public class AssignKitchenLimitStrategyTests
         //Arrange
         DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
         Order order = GetSampleOrders()[0];
-        AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(intervalInMinutes,numberOfHours,date,timeslotMax);
+        AssignKitchenNormalStrategy kitchen = new AssignKitchenNormalStrategy(intervalInMinutes,numberOfHours,date,timeslotMax);
        
         
         //Act
@@ -98,6 +96,7 @@ public class AssignKitchenLimitStrategyTests
 
         Assert.AreEqual(order.Id,kitchen.GetTimeSlots()[0].TimeSlotOrders[0].Id);
     }
+
     [Test]
     [TestCase(40,8,4)]
     
@@ -105,7 +104,7 @@ public class AssignKitchenLimitStrategyTests
     {
         DateTime date = new DateTime(2022, 5, 8, 16, 0, 0);
         Order order = GetSampleOrders()[0];
-        AssignKitchenLimitStrategy kitchen = new AssignKitchenLimitStrategy(intervalInMinutes,numberOfHours,date,timeslotMax);
+        AssignKitchenNormalStrategy kitchen = new AssignKitchenNormalStrategy(intervalInMinutes,numberOfHours,date,timeslotMax);
        
         
         //Act
@@ -115,7 +114,8 @@ public class AssignKitchenLimitStrategyTests
         //Assert
         Assert.AreEqual(true,kitchen.GetDeniedOrders().Count==0);
     }
-
+    
+    
     private List<Order> GetSampleOrders()
     {
         List<Order> output = new List<Order>();
@@ -152,3 +152,4 @@ public class AssignKitchenLimitStrategyTests
 
     }
 }
+

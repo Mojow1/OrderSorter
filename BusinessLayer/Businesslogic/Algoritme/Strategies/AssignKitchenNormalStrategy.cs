@@ -38,7 +38,7 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
                 if (CheckTime(order, _timeSlots[i]) && CheckMax(_timeSlots[i]))
                 {
                     _timeSlots[i].TimeSlotOrders.Add(order);
-                    Console.WriteLine("order :"+ order.Id +" added to timslot: " + i);
+                   
                    return;
 
                 }
@@ -49,7 +49,7 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
                 }
             }
             _cancelledOrders.Add(order);
-            Console.WriteLine("order :" + order.Id +" cancelled ");
+           
 
         }
 
@@ -89,7 +89,10 @@ public class AssignKitchenNormalStrategy : IAssignStrategy
 
        private void ClearOrdersAndTimeSlots()
         {
-            _timeSlots.Clear();
+            for (int i = 0; i < _timeSlots.Count; i++)
+            {
+                _timeSlots[i].TimeSlotOrders.Clear();
+            }
             _cancelledOrders.Clear();
         }
     

@@ -44,7 +44,7 @@ namespace orderSorter.Businesslogic.Algoritme
                 if (CheckTime(order, _timeSlots[i]) && CheckMax(_timeSlots[i]))
                 {
                     _timeSlots[i].TimeSlotOrders.Add(order);
-                    Console.WriteLine("order :"+ order.Id +" added to timslot: " + i);
+                   
                    return;
 
                 }
@@ -55,7 +55,7 @@ namespace orderSorter.Businesslogic.Algoritme
                 }
             }
             _cancelledOrders.Add(order);
-            Console.WriteLine("order :" + order.Id +" cancelled ");
+           
 
         }
 
@@ -95,7 +95,10 @@ namespace orderSorter.Businesslogic.Algoritme
 
         private void ClearsOrdersAndTimeSlots()
         {
-            _timeSlots.Clear();
+            for (int i = 0; i < _timeSlots.Count; i++)
+            {
+                _timeSlots[i].TimeSlotOrders.Clear();
+            }
             _cancelledOrders.Clear();
         }
 
