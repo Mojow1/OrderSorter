@@ -1,6 +1,8 @@
 namespace orderSorter.Businesslogic.Business.Staff
 {
-    public class Deliverer
+
+
+    public class Deliverer 
     {
         public int Id { get; set; }
         public string Name { get;  }

@@ -53,7 +53,7 @@ public class BusinessOrderTests
             var actual = bs.DataProviderOrder.FetchAllOrders();
             
             Assert.True((actual != null));
-            Assert.AreEqual(expected.Count, actual.Count);
+            Assert.AreEqual(expected.Count+1, actual.Count);
 
             for (int i = 0; i < expected.Count; i++)
             {
